@@ -1,6 +1,7 @@
 "use strict";
 var express = require("express");
 var userRoute = require("./routes/users.js");
+var robotRoute = require("./routes/robots.js");
 var session = require("express-session");
 var app = express();
 var cors = require("cors");
@@ -9,10 +10,8 @@ var cookieParser = require("cookie-parser");
 
 const { frontendURI } = require("./utils/config");
 
-// var connectMongoDB = require("./routes/connectionTest");
-
-// var connectMongoDB = require("./routes/connectionTestPool");
-// connectMongoDB();
+const connectMongoDB = require("./utils/mongoConnection");
+connectMongoDB();
 
 app.use(bodyParser.json());
 app.use(cookieParser());
@@ -46,5 +45,5 @@ app.use(
 );
 
 app.use("/user", userRoute);
-
+app.use("/robots", robotRoute);
 module.exports = app;
