@@ -1,5 +1,6 @@
 "use strict";
 var express = require("express");
+var userRoute = require("./routes/users.js");
 var session = require("express-session");
 var app = express();
 var cors = require("cors");
@@ -43,5 +44,7 @@ app.use(
     activeDuration: 5 * 60 * 1000,
   })
 );
+
+app.use("/user", userRoute);
 
 module.exports = app;
