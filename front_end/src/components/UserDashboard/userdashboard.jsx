@@ -1,15 +1,15 @@
-import React from 'react';
+import React from "react";
 
-import { Sidebar } from '../Util/Layout';
+import { UserSidebar } from "../Util/UserLayout";
 
-class Dashboard extends React.Component {
-    render() {
-        return (
-            <Sidebar>
-                <h2>User Dashboard Page</h2>
-            </Sidebar>
-        )
-    }
+class UserDashboard extends React.Component {
+  render() {
+    return (
+      <UserSidebar>
+        <h2>User Dashboard Page</h2>
+      </UserSidebar>
+    );
+  }
 }
 
-export default Dashboard;
+export default UserDashboard;
