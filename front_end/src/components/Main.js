@@ -8,6 +8,8 @@ import HomePage from "./Dashboard/dashboard";
 import UserDashboard from "./UserDashboard/userdashboard";
 import ActiveUsers from "./Users/ActiveUsers";
 import RegisteredUsers from "./Users/RegisteredUsers";
+import RegisteredRobots from "./Robots/registeredRobots";
+import ActiveRobots from "./Robots/activeRobots";
 
 class Main extends Component {
     render() {
@@ -20,6 +22,8 @@ class Main extends Component {
                 <Route path="/userdashboard" component={UserDashboard} />
                 <Route path="/registeredUsers" component={RegisteredUsers} />
                 <Route path="/activeUsers" component={ActiveUsers} />
+                <Route path="/registeredRobots" component={RegisteredRobots} />
+                <Route path="/activeRobots" component={ActiveRobots} />
             </div>
         );
     }

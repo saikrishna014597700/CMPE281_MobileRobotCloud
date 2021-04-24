@@ -23,3 +23,18 @@ code {
   border-radius: 7px;
   border-color: rgb(135, 184, 230);
 }
+
+.wrapper {
+  padding: 20px;
+  margin-top: -20px;
+}
+
+.image--cover2 {
+  width: "200px";
+  height: 150px;
+  border-radius: 50%;
+  margin: 20px;
+  margin-top: -0px;
+  object-fit: cover;
+  object-position: center;
+}

@@ -6,9 +6,9 @@ const { STATUS_CODE, MESSAGES } = require("../utils/constants");
 router.get("/allActiveUsers", async (req, res) => {
   try {
     return await pool.query(
-      "select * from user",
+      "select * from user where is_active = 1",
       async function (error, result) {
-        console.log("resiltAll iusers", result)
+        console.log("active iusers", result)
         res.status(STATUS_CODE.SUCCESS).send({ status: STATUS_CODE.SUCCESS, payload: result });
       });
   } catch (error) {

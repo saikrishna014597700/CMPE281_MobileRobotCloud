@@ -8,24 +8,20 @@ const { STATUS_CODE, MESSAGES } = require("../utils/constants");
 router.post("/register", async (req, res) => {
     let user = req.body;
     console.log("backend Register", user);
-    let response = {};
-    let err = {};
     try {
-        pool.query(
+        return await pool.query(
             `INSERT INTO user (email, password, first_name, last_name, role) VALUES ('${user.username}', '${user.password}', '${user.firstName}', '${user.lastName}', '${user.role}');`,
             async (err, sqlResult) => {
-                if (sqlResult && sqlResult.length > 0) {
-                    response.result = sqlResult;
+                console.log("sql", sqlResult)
+                if (sqlResult && sqlResult.affectedRows > 0) {
+                    res.status(STATUS_CODE.SUCCESS).send({ status: STATUS_CODE.SUCCESS, payload: sqlResult });
+                } else {
+                    res.status(STATUS_CODE.INTERNAL_SERVER_ERROR).send({ status: STATUS_CODE.INTERNAL_SERVER_ERROR, payload: "error" });
                 }
-                response.status = STATUS_CODE.CREATED_SUCCESSFULLY;
-                response.data = MESSAGES.CREATE_SUCCESSFUL;
-                return response;
             }
         );
     } catch (error) {
-        err.status = STATUS_CODE.INTERNAL_SERVER_ERROR;
-        err.data = MESSAGES.INTERNAL_SERVER_ERROR;
-        return err;
+        res.status(STATUS_CODE.INTERNAL_SERVER_ERROR).send({ status: STATUS_CODE.INTERNAL_SERVER_ERROR, payload: error });
     }
 });
 

@@ -17,9 +17,13 @@ function login(username, password) {
         userService.login(username, password)
             .then(
                 user => {
-                    console.log("success")
                     dispatch(success(user));
-                    history.push("/dashboard");
+                    if (user.data.payload[0].role === 'Admin') {
+                        history.push("/dashboard");
+                    } else {
+                        history.push("/userdashboard");
+                    }
+
                 },
                 error => {
                     dispatch(failure(error.toString()));
@@ -46,7 +50,7 @@ function register(user) {
             .then(
                 user => {
                     dispatch(success());
-                    // history.push('/login');
+                    history.push('/login');
                     dispatch(alertActions.success('Registration successful'));
                 },
                 error => {

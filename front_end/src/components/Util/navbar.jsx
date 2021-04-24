@@ -8,7 +8,7 @@ export const Navbar = () => {
     const history = useHistory();
     const location = useLocation();
     return (
-        <div style={{ width: "17%" }}>
+        <div style={{ width: "17%", backgroundColor: "#B1DCF1" }}>
             <Navigation
                 activeItemId={location.pathname}
                 onSelect={({ itemId }) => {
@@ -17,12 +17,12 @@ export const Navbar = () => {
                 items={[
                     {
                         title: 'Dashboard',
-                        itemId: '#',
+                        itemId: '/dashboard',
                         elemBefore: () => <Icon name="activity" />
                     },
                     {
                         title: 'Users',
-                        // itemId: '/users',
+                        itemId: '#',
                         elemBefore: () => <Icon name="users" />,
                         subNav: [
                             {
@@ -37,27 +37,27 @@ export const Navbar = () => {
                     },
                     {
                         title: 'Robots',
-                        // itemId: '/robots',
+                        // itemId: '##',
                         elemBefore: () => <Icon name="radio" />,
                         subNav: [
                             {
                                 title: 'Registered Robots',
-                                itemId: 'registeredrobots',
+                                itemId: '/registeredRobots',
                             },
                             {
                                 title: 'Active Robots',
-                                itemId: 'activerobots',
+                                itemId: '/activeRobots',
                             }
                         ],
                     },
                     {
                         title: 'State distribution',
                         itemId: '/stateDistribution',
-                        elemBefore: () => <Icon name="lock" />
+                        elemBefore: () => <Icon name="book" />
                     },
                     {
                         title: 'Logout',
-                        itemId: '/logout',
+                        itemId: '/login',
                         elemBefore: () => <Icon name="lock" />
                     },
                 ]}

@@ -2,46 +2,48 @@ import React, { Component } from "react";
 import "../../App.css";
 import axios from "axios";
 import { backend } from "../../webConfig";
-import { Redirect } from "react-router";
 import { Sidebar } from "../Util/Layout";
-import userImage from "../Util/userImage.jpeg";
+import roboImage from "../Util/roboImage.jpeg";
 
-class RegisterdUsers extends Component {
+class ActiveRobots extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            users: []
+            robots: []
         };
     }
     componentDidMount() {
         axios
-            .get(backend + "/api/users/allRegUsers", {
+            .get(backend + "/api/robots/allActiveRobots", {
                 headers: {
                     "Content-Type": "application/json"
                 }
             })
             .then(response => {
+                console.log("Robots", response)
                 if (response.data) {
-                    this.setState({ users: response.data.payload })
+                    this.setState({ robots: response.data })
                 }
             });
     }
 
     render() {
-        let users = this.state.users.map(
-            user => {
+        let robots = this.state.robots.map(
+            robot => {
                 return (
                     <div class="col-sm-4 o">
                         <div class="card2">
                             <div class="wrapper">
                                 <img
-                                    src={userImage}
+                                    src={roboImage}
                                     class="image--cover2"
                                 ></img>
                             </div>
-                            <h2>Name: {user.first_name} {user.last_name} </h2>
+                            <h2>Robot id: {robot.roboId}  </h2>
                             <br />
-                            <h2>Role: {user.role} </h2>
+                            <h2>Robot State: {robot.roboState} </h2>
+                            <br />
+                            <h2>Run Time: {robot.runTime} </h2>
                         </div>
                     </div>
                 );
@@ -51,9 +53,9 @@ class RegisterdUsers extends Component {
             <div>
                 <Sidebar>
                     <br />
-                    <h2 style={{ marginLeft: "10%", fontSize: "20px" }}> Registered Users</h2>
+                    <h2 style={{ marginLeft: "10%", fontSize: "20px" }}> Active Robots</h2>
                     <div className="row">
-                        {users}
+                        {robots}
                     </div>
                 </Sidebar>
             </div >
@@ -61,4 +63,4 @@ class RegisterdUsers extends Component {
     }
 }
 
-export default RegisterdUsers;
+export default ActiveRobots;
