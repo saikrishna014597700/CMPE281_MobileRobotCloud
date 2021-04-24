@@ -2,8 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { userActions } from "../../actions/user.action"
+import { useHistory } from "react-router-dom";
 
-export default function Login() {
+export const mapStatetoProps = user => ({
+  user
+})
+
+function Login() {
   const [inputs, setInputs] = useState({
     username: '',
     password: ''
@@ -13,7 +18,9 @@ export default function Login() {
   const { username, password } = inputs;
   // const loggingIn = useSelector(state => state.authentication.loggingIn);
   const dispatch = useDispatch();
+  const user = useSelector(state => state.authentication.user);
   const location = useLocation();
+  let history = useHistory();
 
   useEffect(() => {
     dispatch(userActions.logout());
@@ -26,12 +33,9 @@ export default function Login() {
 
   function handleSubmit(e) {
     e.preventDefault();
-
     setSubmitted(true);
     if (username && password) {
-      // get return url from location state or default to home page
-      const { from } = location.state || { from: { pathname: "/" } };
-      dispatch(userActions.login(username, password, from));
+      dispatch(userActions.login(username, password));
     }
   }
 
@@ -67,4 +71,4 @@ export default function Login() {
   );
 }
 
-export { Login };
+export default Login;

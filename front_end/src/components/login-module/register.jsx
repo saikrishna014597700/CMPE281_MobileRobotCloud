@@ -10,7 +10,7 @@ function RegisterPage() {
         lastName: '',
         username: '',
         password: '',
-        role: ''
+        role: 'admin'
     });
     const [submitted, setSubmitted] = useState(false);
     const registering = useSelector(state => state.registration.registering);
@@ -30,6 +30,7 @@ function RegisterPage() {
 
         setSubmitted(true);
         if (user.firstName && user.lastName && user.username && user.password && user.role) {
+            console.log("Register", user);
             dispatch(userActions.register(user));
         }
     }
@@ -70,7 +71,7 @@ function RegisterPage() {
                     <label>Role</label>
                     <select
                         name="role"
-                        onChange={e => this.handleChange(e)}
+                        onChange={handleChange}
                         className={'form-control' + (submitted && !user.role ? ' is-invalid' : '')}
                     >
                         <option value="Admin">admin</option>

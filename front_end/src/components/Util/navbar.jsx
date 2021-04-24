@@ -27,11 +27,11 @@ export const Navbar = () => {
                         subNav: [
                             {
                                 title: 'Registered Users',
-                                itemId: '/registeredusers',
+                                itemId: '/registeredUsers',
                             },
                             {
                                 title: 'Active Users',
-                                itemId: 'activeusers',
+                                itemId: '/activeUsers',
                             },
                         ],
                     },

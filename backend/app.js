@@ -44,6 +44,4 @@ app.use(
   })
 );
 
-app.use("/user", userRoute);
-app.use("/robots", robotRoute);
 module.exports = app;

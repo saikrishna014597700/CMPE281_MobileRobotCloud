@@ -13,4 +13,4 @@ const store = createStore(
     storeEnhancers(applyMiddleware(...middleware))
 );
 
-export default store;
+export { store };

@@ -1,16 +1,15 @@
 import React, { Component } from "react";
 import "./App.css";
 import Main from "./components/Main";
-import { BrowserRouter } from "react-router-dom";
+import { Router } from "react-router-dom";
+import { history } from "./components/Util/history"
 
 class App extends Component {
   render() {
     return (
-      <BrowserRouter>
-        <div>
-          <Main />
-        </div>
-      </BrowserRouter>
+      <Router history={history}>
+        <Main />
+      </Router>
     );
   }
 }
