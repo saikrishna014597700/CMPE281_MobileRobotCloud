@@ -7,12 +7,12 @@ export const UserSidebar = ({ children }) => {
       <div className="flex h-screen bg-gray-200">
         <NavbarUser />
 
-        <div className="flex flex-col flex-1 overflow-hidden">
+        <div className="flex flex-col flex-1 overflow-auto">
           <main className="content">
             <section className="sm:flex-row flex flex-col flex-1">
               <div
                 className="content-box"
-              // style={{ flexGrow: 2, flexBasis: "0%" }}
+                style={{ flexGrow: 2, flexBasis: "0%" }}
               >
                 {children}
               </div>

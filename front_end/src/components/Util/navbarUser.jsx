@@ -22,24 +22,16 @@ export const NavbarUser = () => {
           },
           {
             title: "Robot Control",
-            // itemId: '/users',
+            itemId: '#',
             elemBefore: () => <Icon name="users" />,
             subNav: [
               {
-                title: "Create Robot",
-                itemId: "/createRobot",
-              },
-              {
-                title: "Stop Robot",
-                itemId: "/stopRobot",
+                title: "Choose Robot",
+                itemId: "/chooseRobot",
               },
               {
                 title: "Move Robot",
                 itemId: "/moveRobot",
-              },
-              {
-                title: "Pause Robot",
-                itemId: "/pauseRobot",
               },
               {
                 title: "Robot Status",
@@ -57,8 +49,8 @@ export const NavbarUser = () => {
               //   itemId: "/robotBilling",
               // },
               {
-                title: "Total Billing",
-                itemId: "/totalBilling",
+                title: "Robot Path",
+                itemId: "/robotPath",
               },
             ],
           },

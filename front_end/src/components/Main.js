@@ -10,27 +10,30 @@ import ActiveUsers from "./Users/ActiveUsers";
 import RegisteredUsers from "./Users/RegisteredUsers";
 import RegisteredRobots from "./Robots/registeredRobots";
 import ActiveRobots from "./Robots/activeRobots";
+import CreateRobot from "./Robots/createRobots";
+import ChooseRobot from "./Robots/chooseRobots";
+import RobotStatus from "./Robots/robotStatus";
 import AdminStateDistribution from "./StateDistribution/adminStateDistribution";
 import MoveRobot from "./Robots/moveRobot";
 
 class Main extends Component {
-  render() {
-    return (
-      <div>
-        <Route path="/" component={NavbarDefault} />
-        <Route path="/login" component={Login} />
-        <Route path="/register" component={RegisterPage} />
-        <Route path="/dashboard" component={HomePage} />
-        <Route path="/userdashboard" component={UserDashboard} />
-        <Route path="/registeredUsers" component={RegisteredUsers} />
-        <Route path="/activeUsers" component={ActiveUsers} />
-        <Route path="/registeredRobots" component={RegisteredRobots} />
-        <Route path="/activeRobots" component={ActiveRobots} />
-        <Route path="/stateDistribution" component={AdminStateDistribution} />
-        <Route path="/moveRobot" component={MoveRobot} />
-      </div>
-    );
-  }
+    render() {
+        return (
+            <div>
+                <Route path="/" component={NavbarDefault} />
+                <Route path="/login" component={Login} />
+                <Route path="/register" component={RegisterPage} />
+                <Route path="/dashboard" component={HomePage} />
+                <Route path="/userdashboard" component={UserDashboard} />
+                <Route path="/registeredUsers" component={RegisteredUsers} />
+                <Route path="/activeUsers" component={ActiveUsers} />
+                <Route path="/registeredRobots" component={RegisteredRobots} />
+                <Route path="/activeRobots" component={ActiveRobots} />
+                <Route path="/stateDistribution" component={AdminStateDistribution} />
+                <Route path="/moveRobot" component={MoveRobot} />
+            </div>
+        );
+    }
 }
 
 export default Main;
