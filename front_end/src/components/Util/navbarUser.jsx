@@ -37,6 +37,10 @@ export const NavbarUser = () => {
                 title: "Robot Status",
                 itemId: "/robotStatus",
               },
+              {
+                title: "Robot Path",
+                itemId: "/robotPath",
+              },
             ],
           },
           {
@@ -49,8 +53,8 @@ export const NavbarUser = () => {
               //   itemId: "/robotBilling",
               // },
               {
-                title: "Robot Path",
-                itemId: "/robotPath",
+                title: "Total Billing",
+                itemId: "/totalBilling",
               },
             ],
           },

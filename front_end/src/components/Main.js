@@ -15,6 +15,7 @@ import ChooseRobot from "./Robots/chooseRobots";
 import RobotStatus from "./Robots/robotStatus";
 import AdminStateDistribution from "./StateDistribution/adminStateDistribution";
 import MoveRobot from "./Robots/moveRobot";
+import MoveARobot from "./Robots/moveARobot";
 
 class Main extends Component {
     render() {
@@ -31,6 +32,9 @@ class Main extends Component {
                 <Route path="/activeRobots" component={ActiveRobots} />
                 <Route path="/stateDistribution" component={AdminStateDistribution} />
                 <Route path="/moveRobot" component={MoveRobot} />
+                <Route path="/chooseRobot" component={ChooseRobot} />
+                <Route path="/robotStatus" component={RobotStatus} />
+                <Route path="/moveARobot" component={MoveARobot} />
             </div>
         );
     }

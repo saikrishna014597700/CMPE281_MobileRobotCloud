@@ -1,123 +1,87 @@
-import React from "react";
-import { Link, useLocation } from "react-router-dom";
-import { UserSidebar } from "../Util/UserLayout";
-import { useSelector } from "react-redux";
+import React, { Component } from "react";
+import "../../App.css";
+import axios from "axios";
 import { backend } from "../../webConfig";
+import { UserSidebar } from "../Util/UserLayout";
+import roboImage from "../Util/roboImage.jpeg";
+import { history } from '../Util/history';
 
-const MoveRobot = () => {
-  let UserDetails = {};
-  const user = useSelector((state) => state.authentication.user);
-  console.log("Userrr", user);
-  if (!localStorage.getItem("user_fn")) {
-    UserDetails = user.data.payload[0];
-    localStorage.setItem("user_fn", UserDetails.first_name);
-    localStorage.setItem("user_ln", UserDetails.last_name);
-    localStorage.setItem("user_role", UserDetails.role);
+class MoveRobot extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      robots: []
+    };
+  }
+  chooseRobot = (e, id) => {
+    history.push('/moveARobot', id);
   }
 
-  // let startRobo = (e) => {
-  //   e.preventDefault();
-  //   var data = {
-  //     roboId: 1,
-  //     roboState: "Active",
-  //   };
-  //   axios
-  //     .post(`${backend}/homelistings/submitLease`, data)
-  //     .then(async function (response) {
-  //       console.log("Pro are::", response.data);
-  //       var emailData = {
-  //         toEmail: toEmail,
-  //         emailType: "Lease Application",
-  //         listingName: listingName,
-  //       };
+  componentDidMount() {
+    axios
+      .get(backend + "/api/robots/allRegRobots", {
+        params: {
+          user_id: localStorage.getItem('user_Id')
+        }
+      }, {
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+      .then(response => {
+        if (response.data) {
+          this.setState({ robots: response.data })
+        }
+      });
+  }
 
-  //       await axios
-  //         .post(`${backend}/email/sendEmail`, emailData)
-  //         .then((response2) => {
-  //           alert("Application sent");
-  //           console.log("email sent");
-  //         });
-  //     });
-  // };
-
-  return (
-    <UserSidebar>
-      <div class="card2">
-        <br />
-        <h2>
-          Welcome to Robots {localStorage.getItem("user_fn")}{" "}
-          {localStorage.getItem("user_ln")}{" "}
-        </h2>
-        <br />
-        You logged in as an {localStorage.getItem("user_role")}
-        <br />
-      </div>
-      <div class="card2">
-        <div class="row">
-          <div class="col">
-            <div className="form-group">
-              <button className="btn btn-outline-primary">Up</button>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-4">
-            <div className="form-group">
-              <button className="btn btn-outline-primary">Left</button>
-            </div>
-          </div>
-          <div class="col-4">
-            <div className="form-group">
+  render() {
+    let robots = this.state.robots.map(
+      robot => {
+        return (
+          <div class="col-sm-4 o">
+            <div class="card2">
+              <div class="wrapper">
+                <img
+                  src={roboImage}
+                  class="image--cover2"
+                ></img>
+              </div>
+              <h2>Robot id: {robot.roboId}  </h2>
+              <br />
+              <h2>Robot State: {robot.roboState} </h2>
+              <br />
+              <h2>Robot Name: {robot.roboName} </h2>
+              <br />
+              <h2>Run Time: {robot.runTime}</h2>
               <button
-                // onClick={this.startRobo}
-                className="btn btn-outline-primary"
+                class="btn btn-success"
+                onClick={e => this.chooseRobot(e, robot._id)}
+                type="submit"
               >
-                Start/Stop
+                Move
               </button>
+
+              <br />
+              <br />
+              <br />
             </div>
           </div>
-          <div class="col-4">
-            <div className="form-group">
-              <button className="btn btn-outline-primary">Right</button>
-            </div>
+        );
+      }
+    );
+    return (
+      <div>
+        <UserSidebar>
+          <br />
+          <h2 style={{ marginLeft: "10%", fontSize: "20px" }}> Move Robots</h2>
+          <div className="row">
+            {robots}
           </div>
-        </div>
-
-        <div class="row">
-          <div class="col">
-            <div className="form-group">
-              <button className="btn btn-outline-primary">Down</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </UserSidebar>
-  );
-
-  // const user = useSelector(state => state.authentication.user)
-  // let UserDetails = {};
-  // if (localStorage.getItem('user_fn')) {
-  //     UserDetails = user.data.payload[0];
-  //     localStorage.setItem('user_fn', UserDetails.first_name)
-  //     localStorage.setItem('user_ln', UserDetails.last_name)
-  //     localStorage.setItem('user_role', UserDetails.role)
-  // }
-  // console.log("Userd", localStorage.getItem("user_fn"), user.data);
-  // if (localStorage.getItem('user_fn')) {
-  //     return (
-  //         <Sidebar>
-  //             <div class="card2">
-  //                 <br />
-  //                 <h2>Welcome {localStorage.getItem('user_fn')} {localStorage.getItem('user_ln')} </h2>
-  //                 <br />
-  //                 You logged in as an {localStorage.getItem('user_role')}
-  //                 <br />
-  //             </div>
-  //         </Sidebar>
-  //     )
-};
-// return <Sidebar>Loading..</Sidebar>
-
-// }
+        </UserSidebar>
+      </div >
+    );
+  }
+}
 
 export default MoveRobot;

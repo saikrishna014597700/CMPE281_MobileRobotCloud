@@ -17,7 +17,7 @@ class ChooseRobots extends Component {
         history.push("/createRobot")
     }
     chooseRobot = e => {
-        history.push("/createRobot")
+        history.push("/moveRobot")
     }
     componentDidMount() {
         axios

@@ -39,6 +39,37 @@ code {
   object-position: center;
 }
 
-.container {
-  justify-content: center;
+.btn {
+  border: 2px solid #15A0E5;
+  background-color: white;
+  color: black;
+  padding: 12px 24px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-right: 40px;
+  margin-top: 20px;
+  width: 150px;
+}
+
+.btn2 {
+  border: 2px solid white;
+  background-color: white;
+  color: white;
+  padding: 12px 24px;
+  font-size: 16px;
+  cursor: pointer;
+  float: right;
+  margin-right: 40px;
+  margin-top: 20px;
+  width: 150px;
+}
+
+.success {
+  border-color: #1569e0;
+  color: #1569e0;
+}
+
+.hide {
+  border-color: white;
+  color:white;
 }

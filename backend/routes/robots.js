@@ -79,10 +79,12 @@ router.post("/changeRobotPath", async (req, response) => {
 });
 
 router.get("/getRobot", async (req, response) => {
-  console.log("get robot Robot Id:", req.params, req.body)
-  return robots.findById({ roboState: req.params.robotId })
+  console.log("get robot Robot Id:", req.query, req.params)
+  const robotId = req.query.robotId;
+  return robots.findById(robotId)
     .exec()
     .then(robot => {
+      console.log("robot", robot)
       response.status(200).json(robot);
     })
     .catch(err => {
