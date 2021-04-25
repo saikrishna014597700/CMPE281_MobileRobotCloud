@@ -38,3 +38,7 @@ code {
   object-fit: cover;
   object-position: center;
 }
+
+.container {
+  justify-content: center;
+}

@@ -17,7 +17,7 @@ export const NavbarUser = () => {
         items={[
           {
             title: "Robot Dashboard",
-            itemId: "#",
+            itemId: "/userDashboard",
             elemBefore: () => <Icon name="activity" />,
           },
           {
@@ -52,21 +52,21 @@ export const NavbarUser = () => {
             // itemId: '/robots',
             elemBefore: () => <Icon name="radio" />,
             subNav: [
-              {
-                title: "Robot Billing",
-                itemId: "/robotBilling",
-              },
+              // {
+              //   title: "Robot Billing",
+              //   itemId: "/robotBilling",
+              // },
               {
                 title: "Total Billing",
                 itemId: "/totalBilling",
               },
             ],
           },
-          {
-            title: "State distribution",
-            itemId: "/stateDistribution",
-            elemBefore: () => <Icon name="lock" />,
-          },
+          // {
+          //   title: "State distribution",
+          //   itemId: "/stateDistribution",
+          //   elemBefore: () => <Icon name="lock" />,
+          // },
           {
             title: "Logout",
             itemId: "/logout",
