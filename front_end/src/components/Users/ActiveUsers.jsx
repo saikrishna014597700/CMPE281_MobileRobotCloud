@@ -51,7 +51,7 @@ class ActiveUsers extends Component {
                 <Sidebar>
                     <br />
                     <h2 style={{ marginLeft: "10%", fontSize: "20px" }}> Active Users</h2>
-                    <div className="row">
+                    <div className="row" style={{ overflow: "auto" }}>
                         {users}
                     </div>
                 </Sidebar>

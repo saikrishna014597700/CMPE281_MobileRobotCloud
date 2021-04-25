@@ -20,16 +20,14 @@ function login(username, password) {
             }
         })
         .then(response => {
-            console.log("Service", response)
-            if (response.status == "200") {
-                localStorage.setItem('user', JSON.stringify(user));
-            }
             return response;
         });
 }
 
 function logout() {
-    localStorage.removeItem('user');
+    localStorage.removeItem('user_fn');
+    localStorage.removeItem('user_ln');
+    localStorage.removeItem('user_role');
 }
 
 function register(user) {

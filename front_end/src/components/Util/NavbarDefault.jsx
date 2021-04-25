@@ -5,6 +5,11 @@ import 'react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css';
 import Icon from "awesome-react-icons";
 
 export const NavbarDefault = () => {
+    let userDetails;
+    let url = window.location.href;
+    if (localStorage.getItem('user_fn') && !url.includes("/login")) {
+        userDetails = <div style={{ color: "white", marginLeft: "75%" }}>{localStorage.getItem('user_fn')}{" "}{localStorage.getItem('user_ln')}{" : "}{localStorage.getItem('user_role')}</div>;
+    }
     return (
         <div style={{ backgroundColor: "#15A0E5" }}>
             <nav class="navbar navbar-expand-lg navbar-light">
@@ -13,11 +18,7 @@ export const NavbarDefault = () => {
                 </button>
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
                     <a class="navbar-brand" href="#" style={{ color: "white" }}>Mobile Robot Cloud</a>
-                    {/* <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                        <li class="nav-item active">
-                            <a class="nav-link" style={{ color: "white" }} href="#">Home <span class="sr-only">(current)</span></a>
-                        </li>
-                    </ul> */}
+                    {userDetails}
                 </div>
             </nav>
 

@@ -10,6 +10,7 @@ import ActiveUsers from "./Users/ActiveUsers";
 import RegisteredUsers from "./Users/RegisteredUsers";
 import RegisteredRobots from "./Robots/registeredRobots";
 import ActiveRobots from "./Robots/activeRobots";
+import AdminStateDistribution from "./StateDistribution/adminStateDistribution";
 
 class Main extends Component {
     render() {
@@ -24,6 +25,7 @@ class Main extends Component {
                 <Route path="/activeUsers" component={ActiveUsers} />
                 <Route path="/registeredRobots" component={RegisteredRobots} />
                 <Route path="/activeRobots" component={ActiveRobots} />
+                <Route path="/stateDistribution" component={AdminStateDistribution} />
             </div>
         );
     }
