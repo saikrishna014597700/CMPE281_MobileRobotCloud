@@ -16,8 +16,8 @@ class ChooseRobots extends Component {
     createRobot = e => {
         history.push("/createRobot")
     }
-    chooseRobot = e => {
-        history.push("/moveRobot")
+    chooseRobot = (e, id) => {
+        history.push("/moveARobot", id)
     }
     componentDidMount() {
         axios
@@ -58,7 +58,7 @@ class ChooseRobots extends Component {
                             <h2>Run Time: {robot.runTime}</h2>
                             <button
                                 class="btn btn-success"
-                                onClick={this.chooseRobot}
+                                onClick={e => this.chooseRobot(e, robot._id)}
                                 type="submit"
                             >
                                 Choose

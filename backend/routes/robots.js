@@ -3,6 +3,16 @@ const robots = require("../models/robots.js");
 var ObjectId = require("mongodb").ObjectID;
 
 router.get("/allActiveRobots", async (req, response) => {
+  if (req.query.user_id) {
+    return robots.find({ "userId": req.query.user_id, "roboState": "Active" })
+      .exec()
+      .then(robot => {
+        response.status(200).json(robot);
+      })
+      .catch(err => {
+        response.status(500).json({ error: err });
+      });
+  }
   return robots.find({ "roboState": "Active" })
     .exec()
     .then(robot => {
@@ -14,7 +24,6 @@ router.get("/allActiveRobots", async (req, response) => {
 });
 
 router.get("/allRegRobots", async (req, response) => {
-  console.log("aaaa", req)
   if (req.query.user_id) {
     return robots.find({ userId: req.query.user_id })
       .exec()
@@ -48,7 +57,6 @@ router.post("/createRobot", async (req, response) => {
     startSessionTime: req.body.startSessionTime,
     endSessionTime: req.body.endSessionTime
   });
-  console.log("Req Data is", req.body);
   return robot.save(function (err, res) {
     if (err) return response.status(500).json({ error: err });
     response.status(200).json(robots);
@@ -57,7 +65,8 @@ router.post("/createRobot", async (req, response) => {
 });
 
 router.post("/changeRobotStatus", async (req, response) => {
-  return robots.update({ roboState: req.body.roboState })
+  console.log("state", req.body)
+  return robots.updateOne({ _id: req.body.id }, { roboState: req.body.roboState })
     .exec()
     .then(robot => {
       response.status(200).json(robot);
@@ -68,7 +77,11 @@ router.post("/changeRobotStatus", async (req, response) => {
 });
 
 router.post("/changeRobotPath", async (req, response) => {
-  return robots.update({ $push: { roboPath: req.body.robopath } })
+  const data = {
+    x: req.body.x,
+    y: req.body.y,
+  }
+  return robots.updateOne({ _id: req.body.id }, { $push: { roboPath: data } })
     .exec()
     .then(robot => {
       response.status(200).json(robot);
@@ -79,12 +92,10 @@ router.post("/changeRobotPath", async (req, response) => {
 });
 
 router.get("/getRobot", async (req, response) => {
-  console.log("get robot Robot Id:", req.query, req.params)
   const robotId = req.query.robotId;
   return robots.findById(robotId)
     .exec()
     .then(robot => {
-      console.log("robot", robot)
       response.status(200).json(robot);
     })
     .catch(err => {

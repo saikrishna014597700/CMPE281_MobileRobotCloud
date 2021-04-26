@@ -2,6 +2,7 @@ import React from 'react';
 
 import { UserSidebar } from "../Util/UserLayout";
 import { useSelector } from "react-redux";
+import roboImage from "../Util/cloudrobo.jpeg";
 
 const UserDashboard = () => {
   let UserDetails = {};
@@ -24,6 +25,9 @@ const UserDashboard = () => {
         <br />
         You logged in as an {localStorage.getItem("user_role")}
         <br />
+        <img
+          src={roboImage}
+        ></img>
       </div>
     </UserSidebar>
   );

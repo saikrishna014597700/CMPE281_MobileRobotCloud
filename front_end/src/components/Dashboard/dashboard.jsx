@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Sidebar } from '../Util/Layout';
 import { useSelector } from 'react-redux';
+import roboImage from "../Util/cloudrobo.jpeg";
 
 const HomePage = () => {
     let UserDetails = {};
@@ -20,6 +21,9 @@ const HomePage = () => {
                 <br />
                 You logged in as an {localStorage.getItem('user_role')}
                 <br />
+                <img
+                    src={roboImage}
+                ></img>
             </div>
         </Sidebar>
     )

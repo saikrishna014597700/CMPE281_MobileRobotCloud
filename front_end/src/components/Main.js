@@ -10,12 +10,16 @@ import ActiveUsers from "./Users/ActiveUsers";
 import RegisteredUsers from "./Users/RegisteredUsers";
 import RegisteredRobots from "./Robots/registeredRobots";
 import ActiveRobots from "./Robots/activeRobots";
+import ActiveUserRobots from "./Robots/activeUserRobots";
 import CreateRobot from "./Robots/createRobots";
 import ChooseRobot from "./Robots/chooseRobots";
 import RobotStatus from "./Robots/robotStatus";
 import AdminStateDistribution from "./StateDistribution/adminStateDistribution";
 import MoveRobot from "./Robots/moveRobot";
 import MoveARobot from "./Robots/moveARobot";
+import RobotPath from "./Robots/robotPath";
+import PlotRobotPath from "./Robots/plotRobotPath";
+import UserBilling from "./Billing/userBilling";
 
 class Main extends Component {
     render() {
@@ -30,11 +34,16 @@ class Main extends Component {
                 <Route path="/activeUsers" component={ActiveUsers} />
                 <Route path="/registeredRobots" component={RegisteredRobots} />
                 <Route path="/activeRobots" component={ActiveRobots} />
+                <Route path="/activeUserRobots" component={ActiveUserRobots} />
                 <Route path="/stateDistribution" component={AdminStateDistribution} />
                 <Route path="/moveRobot" component={MoveRobot} />
                 <Route path="/chooseRobot" component={ChooseRobot} />
+                <Route path="/createRobot" component={CreateRobot} />
                 <Route path="/robotStatus" component={RobotStatus} />
                 <Route path="/moveARobot" component={MoveARobot} />
+                <Route path="/robotPath" component={RobotPath} />
+                <Route path="/plotRobotPath" component={PlotRobotPath} />
+                <Route path="/userBilling" component={UserBilling} />
             </div>
         );
     }

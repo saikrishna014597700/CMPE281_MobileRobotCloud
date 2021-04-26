@@ -41,6 +41,10 @@ export const NavbarUser = () => {
                 title: "Robot Path",
                 itemId: "/robotPath",
               },
+              {
+                title: "Active Robots",
+                itemId: "/activeUserRobots",
+              }
             ],
           },
           {
@@ -54,7 +58,7 @@ export const NavbarUser = () => {
               // },
               {
                 title: "Total Billing",
-                itemId: "/totalBilling",
+                itemId: "/userBilling",
               },
             ],
           },
@@ -65,7 +69,7 @@ export const NavbarUser = () => {
           // },
           {
             title: "Logout",
-            itemId: "/logout",
+            itemId: "/login",
             elemBefore: () => <Icon name="lock" />,
           },
         ]}

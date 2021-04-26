@@ -15,16 +15,7 @@ class MoveARobot extends Component {
             y: 0
         };
     }
-    moveRobot = (e, id) => {
-        history.push('/moveARobot', id);
-    }
-    moveup = (e) => {
-        // let data = {
-        //     x : this.state.x-1;
-        // }
-    }
-
-    componentDidMount() {
+    fetchRobot() {
         axios
             .get(backend + "/api/robots/getRobot", {
                 params: {
@@ -38,12 +29,89 @@ class MoveARobot extends Component {
             .then(response => {
                 if (response.data) {
                     this.setState({ robot: response.data })
-                    let roboPath = this.state.robot.roboPath;
-                    console.log(roboPath[roboPath.length - 1].x)
-                    this.setState({ x: roboPath[roboPath.length - 1].x })
-                    this.setState({ y: roboPath[roboPath.length - 1].y })
+                    var roboPath = this.state.robot.roboPath;
+                    var roboPathLength = this.state.robot.roboPath.length
+                    this.setState({ x: roboPath[roboPathLength - 1].x })
+                    this.setState({ y: roboPath[roboPathLength - 1].y })
                 }
             });
+    }
+    moveRobot = (e, id) => {
+        history.push('/moveARobot', id);
+    }
+    changeStatus = (e) => {
+        const data = {
+            roboState: this.state.robot.roboState === 'Active' ? 'InActive' : 'Active',
+            id: this.props.location.state
+        }
+        axios
+            .post(backend + "/api/robots/changeRobotStatus", data)
+            .then(response => {
+                if (response.data) {
+                    this.fetchRobot()
+                }
+            });
+    }
+    moveup = (e) => {
+        const data = {
+            x: this.state.x,
+            y: this.state.y + 1,
+            id: this.props.location.state
+        }
+        axios
+            .post(backend + "/api/robots/changeRobotPath", data)
+            .then(response => {
+                if (response.data) {
+                    this.fetchRobot()
+                }
+            });
+    }
+    moveDown = (e) => {
+        let data = {
+            x: this.state.x,
+            y: this.state.y - 1,
+            id: this.props.location.state
+        }
+        axios
+            .post(backend + "/api/robots/changeRobotPath", data)
+            .then(response => {
+                if (response.data) {
+                    this.fetchRobot()
+                }
+            });
+    }
+    moveLeft = (e) => {
+        let data = {
+            x: this.state.x - 1,
+            y: this.state.y,
+            id: this.props.location.state
+        }
+        axios
+            .post(backend + "/api/robots/changeRobotPath", data)
+            .then(response => {
+                if (response.data) {
+                    this.fetchRobot()
+                }
+            });
+    }
+    moveRight = (e) => {
+        let data = {
+            x: this.state.x + 1,
+            y: this.state.y,
+            id: this.props.location.state
+        }
+        axios
+            .post(backend + "/api/robots/changeRobotPath", data)
+            .then(response => {
+                if (response.data) {
+                    this.fetchRobot()
+                }
+            });
+    }
+
+    componentDidMount() {
+        console.log("Updateddd")
+        this.fetchRobot()
     }
 
     render() {

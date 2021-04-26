@@ -2,11 +2,10 @@ import React, { Component } from "react";
 import "../../App.css";
 import axios from "axios";
 import { backend } from "../../webConfig";
-import { Redirect } from "react-router";
 import { UserSidebar } from "../Util/UserLayout";
 import roboImage from "../Util/roboImage.jpeg";
 
-class RobotStatus extends Component {
+class ActiveUserRobots extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -15,7 +14,7 @@ class RobotStatus extends Component {
     }
     componentDidMount() {
         axios
-            .get(backend + "/api/robots/allRegRobots", {
+            .get(backend + "/api/robots/allActiveRobots", {
                 params: {
                     user_id: localStorage.getItem('user_Id')
                 }
@@ -25,6 +24,7 @@ class RobotStatus extends Component {
                 }
             })
             .then(response => {
+                console.log("Robots", response)
                 if (response.data) {
                     this.setState({ robots: response.data })
                 }
@@ -59,7 +59,7 @@ class RobotStatus extends Component {
             <div>
                 <UserSidebar>
                     <br />
-                    <h2 style={{ marginLeft: "10%", fontSize: "20px" }}>Your Registered Robots</h2>
+                    <h2 style={{ marginLeft: "10%", fontSize: "20px" }}> Active Robots</h2>
                     <div className="row">
                         {robots}
                     </div>
@@ -69,4 +69,4 @@ class RobotStatus extends Component {
     }
 }
 
-export default RobotStatus;
+export default ActiveUserRobots;

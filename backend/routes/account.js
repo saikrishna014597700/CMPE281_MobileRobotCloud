@@ -53,5 +53,23 @@ router.post("/login", async (req, res) => {
     }
 });
 
+router.get("/userBilling", async (req, res) => {
+    let user = req.body;
+    let user_id = req.query.user_id;
+    console.log("uuu", user_id)
+    try {
+        return await pool.query(
+            "select SUM(billing_amount) as summ from billing_details where user_id = ?",
+            [user_id],
+            async function (error, result) {
+                console.log("res", result)
+                res.status(STATUS_CODE.SUCCESS).send({ status: STATUS_CODE.SUCCESS, payload: result });
+            }
+        );
+    } catch (error) {
+        res.status(STATUS_CODE.INTERNAL_SERVER_ERROR).send({ status: STATUS_CODE.INTERNAL_SERVER_ERROR, payload: error });
+    }
+});
+
 
 module.exports = router;

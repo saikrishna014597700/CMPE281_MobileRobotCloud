@@ -53,7 +53,7 @@ class RegisterdRobots extends Component {
             <div>
                 <Sidebar>
                     <br />
-                    <h2 style={{ marginLeft: "10%", fontSize: "20px" }}> Registered Robots</h2>
+                    <h2 style={{ marginLeft: "10%", fontSize: "20px" }}>Your Registered Robots</h2>
                     <div className="row">
                         {robots}
                     </div>

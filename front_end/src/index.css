@@ -73,3 +73,12 @@ code {
   border-color: white;
   color:white;
 }
+
+.linechart_path {
+  stroke-width: 2;
+  fill: none;
+}
+
+.linechart_axis {
+  stroke: #000000;
+}
