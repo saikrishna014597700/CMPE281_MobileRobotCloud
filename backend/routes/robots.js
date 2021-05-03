@@ -4,42 +4,46 @@ var ObjectId = require("mongodb").ObjectID;
 
 router.get("/allActiveRobots", async (req, response) => {
   if (req.query.user_id) {
-    return robots.find({ "userId": req.query.user_id, "roboState": "Active" })
+    return robots
+      .find({ userId: req.query.user_id, roboState: "Active" })
       .exec()
-      .then(robot => {
+      .then((robot) => {
         response.status(200).json(robot);
       })
-      .catch(err => {
+      .catch((err) => {
         response.status(500).json({ error: err });
       });
   }
-  return robots.find({ "roboState": "Active" })
+  return robots
+    .find({ roboState: "Active" })
     .exec()
-    .then(robot => {
+    .then((robot) => {
       response.status(200).json(robot);
     })
-    .catch(err => {
+    .catch((err) => {
       response.status(500).json({ error: err });
     });
 });
 
 router.get("/allRegRobots", async (req, response) => {
   if (req.query.user_id) {
-    return robots.find({ userId: req.query.user_id })
+    return robots
+      .find({ userId: req.query.user_id })
       .exec()
-      .then(robot => {
+      .then((robot) => {
         response.status(200).json(robot);
       })
-      .catch(err => {
+      .catch((err) => {
         response.status(500).json({ error: err });
       });
   }
-  return robots.find()
+  return robots
+    .find()
     .exec()
-    .then(robot => {
+    .then((robot) => {
       response.status(200).json(robot);
     })
-    .catch(err => {
+    .catch((err) => {
       response.status(500).json({ error: err });
     });
 });
@@ -55,50 +59,91 @@ router.post("/createRobot", async (req, response) => {
     userId: req.body.userId,
     roboId: req.body.robotId,
     startSessionTime: req.body.startSessionTime,
-    endSessionTime: req.body.endSessionTime
+    endSessionTime: req.body.endSessionTime,
   });
   return robot.save(function (err, res) {
     if (err) return response.status(500).json({ error: err });
     response.status(200).json(robots);
   });
-
 });
 
 router.post("/changeRobotStatus", async (req, response) => {
-  console.log("state", req.body)
-  return robots.updateOne({ _id: req.body.id }, { roboState: req.body.roboState })
-    .exec()
-    .then(robot => {
-      response.status(200).json(robot);
-    })
-    .catch(err => {
-      response.status(500).json({ error: err });
-    });
+  console.log("state", req.body);
+  if ("Active" == req.body.roboState) {
+    console.log("entered IF");
+    console.log("hello", req.body.roboState);
+    return robots
+      .updateOne(
+        { _id: req.body.id },
+        { roboState: req.body.roboState, startSessionTime: req.body.timeStamp }
+      )
+      .exec()
+      .then((robot) => {
+        response.status(200).json(robot);
+      })
+      .catch((err) => {
+        response.status(500).json({ error: err });
+      });
+  } else {
+    console.log("entered Else");
+    robots
+      .findById(req.body.id)
+      .then((robot) => {
+        console.log("robot.runTime", robot.runTime);
+        // startTime  = robot.startSessionTime
+        let diff = Date.parse(req.body.timeStamp) - robot.startSessionTime;
+        let runTime = robot.runTime + diff / 1000;
+        console.log(
+          "req.body.timeStamp",
+          typeof Date.parse(req.body.timeStamp)
+        );
+        console.log("robot.startSessionTime", typeof robot.startSessionTime);
+        console.log("diff", diff);
+        console.log("runTime", runTime);
+        return robots
+          .updateOne(
+            { _id: req.body.id },
+            { roboState: req.body.roboState, runTime: runTime }
+          )
+          .exec()
+          .then((robot) => {
+            response.status(200).json(robot);
+          })
+          .catch((err) => {
+            response.status(500).json({ error: err });
+          });
+      })
+      .catch((err) => {
+        response.status(500).json({ error: err });
+      });
+  }
 });
 
 router.post("/changeRobotPath", async (req, response) => {
   const data = {
     x: req.body.x,
     y: req.body.y,
-  }
-  return robots.updateOne({ _id: req.body.id }, { $push: { roboPath: data } })
+  };
+  return robots
+    .updateOne({ _id: req.body.id }, { $push: { roboPath: data } })
     .exec()
-    .then(robot => {
+    .then((robot) => {
       response.status(200).json(robot);
     })
-    .catch(err => {
+    .catch((err) => {
       response.status(500).json({ error: err });
     });
 });
 
 router.get("/getRobot", async (req, response) => {
   const robotId = req.query.robotId;
-  return robots.findById(robotId)
+  return robots
+    .findById(robotId)
     .exec()
-    .then(robot => {
+    .then((robot) => {
       response.status(200).json(robot);
     })
-    .catch(err => {
+    .catch((err) => {
       response.status(500).json({ error: err });
     });
 });
