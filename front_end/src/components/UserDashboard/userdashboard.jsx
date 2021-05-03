@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 import { UserSidebar } from "../Util/UserLayout";
 import { useSelector } from "react-redux";
@@ -13,6 +13,7 @@ const UserDashboard = () => {
     localStorage.setItem("user_fn", UserDetails.first_name);
     localStorage.setItem("user_ln", UserDetails.last_name);
     localStorage.setItem("user_role", UserDetails.role);
+    localStorage.setItem("userId", UserDetails.user_id);
   }
   return (
     <UserSidebar>
@@ -25,9 +26,7 @@ const UserDashboard = () => {
         <br />
         You logged in as an {localStorage.getItem("user_role")}
         <br />
-        <img
-          src={roboImage}
-        ></img>
+        <img src={roboImage}></img>
       </div>
     </UserSidebar>
   );

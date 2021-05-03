@@ -25,6 +25,29 @@ router.get("/allActiveRobots", async (req, response) => {
     });
 });
 
+router.get("/robotsByUser", async (req, response) => {
+  // if (req.query.user_id) {
+  return robots
+    .find({ userId: req.query.userId })
+    .exec()
+    .then((robot) => {
+      response.status(200).json(robot);
+    })
+    .catch((err) => {
+      response.status(500).json({ error: err });
+    });
+  // }
+  // return robots
+  //   .find({ roboState: "Active" })
+  //   .exec()
+  //   .then((robot) => {
+  //     response.status(200).json(robot);
+  //   })
+  //   .catch((err) => {
+  //     response.status(500).json({ error: err });
+  //   });
+});
+
 router.get("/allRegRobots", async (req, response) => {
   if (req.query.user_id) {
     return robots
