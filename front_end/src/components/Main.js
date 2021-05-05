@@ -20,6 +20,7 @@ import MoveARobot from "./Robots/moveARobot";
 import RobotPath from "./Robots/robotPath";
 import PlotRobotPath from "./Robots/plotRobotPath";
 import UserBilling from "./Billing/userBilling";
+import GameBoard from "./RoboMaker/GameBoard";
 
 class Main extends Component {
     render() {
@@ -44,6 +45,8 @@ class Main extends Component {
                 <Route path="/robotPath" component={RobotPath} />
                 <Route path="/plotRobotPath" component={PlotRobotPath} />
                 <Route path="/userBilling" component={UserBilling} />
+                <Route path="/navigation" component={GameBoard} />
+                
             </div>
         );
     }
