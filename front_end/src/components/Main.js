@@ -45,7 +45,8 @@ class Main extends Component {
                 <Route path="/robotPath" component={RobotPath} />
                 <Route path="/plotRobotPath" component={PlotRobotPath} />
                 <Route path="/userBilling" component={UserBilling} />
-                <Route path="/navigation" component={GameBoard} />
+                <Route exact path="/navigation" render={() => {window.location.href="./robot_controller.html"}} />
+                
                 
             </div>
         );
