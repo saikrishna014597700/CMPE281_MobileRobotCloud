@@ -148,7 +148,7 @@ router.post("/changeRobotPath", async (req, response) => {
     y: req.body.y,
   };
   return robots
-    .updateOne({ _id: req.body.id }, { $push: { roboPath: data } })
+    .updateOne({ _id: req.body.id,userId:req.body.userId }, { $push: { roboPath: data } })
     .exec()
     .then((robot) => {
       response.status(200).json(robot);
@@ -162,6 +162,21 @@ router.get("/getRobot", async (req, response) => {
   const robotId = req.query.robotId;
   return robots
     .findById(robotId)
+    .exec()
+    .then((robot) => {
+      response.status(200).json(robot);
+    })
+    .catch((err) => {
+      response.status(500).json({ error: err });
+    });
+});
+
+router.post("/updateStatus", async (req, response) => {
+  const data = {
+  status:req.body.status
+  };
+  return robots
+    .updateOne({ _id: req.body.id }, { roboState:data.status})
     .exec()
     .then((robot) => {
       response.status(200).json(robot);
