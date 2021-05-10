@@ -33,21 +33,31 @@ router.get("/allRegUsers", async (req, res) => {
 router.post("/updateServiceOperations", async(req,res)=>{
   try {
     let userId = req.body.userId;
-
-    await pool.query(`select count(*) as count from billing_details where  user_id = ${userId} and roboId =${req.body.roboId};`, 
+    let rows =0;
+    await pool.query(`select * from billing_details where  user_id = ${userId} and roboId = ${req.body.roboId}`, 
     
     async (error, result) => {
-      console.log("count:: ", result , error);
-
+      console.log("count:: ", result.length ) ;
+      rows = result.length
+      if(rows>0){
+        return await pool.query(
+          `update billing_details set operations = operations +1  where user_id = ${userId} and roboId = ${req.body.roboId} `,
+          async function (error, result) {
+            console.log("resiltAll iusers", result, error)
+            res.status(STATUS_CODE.SUCCESS).send({ status: STATUS_CODE.SUCCESS, payload: result });
+          });
+      }else{
+        return await pool.query(
+          `insert into billing_details(user_id, roboId, operations) values ('${userId}','${req.body.roboId}', 1 )`,
+          async function (error, result) {
+            console.log("resiltAll iusers", result, error)
+            res.status(STATUS_CODE.SUCCESS).send({ status: STATUS_CODE.SUCCESS, payload: result });
+          });
+      }
     }) 
     //console.log("count : ", result);
     
-    return await pool.query(
-      `update billing_details set operations = operations +1, roboId = ${req.body.roboId} where user_id = ${userId}  `,
-      async function (error, result) {
-        console.log("resiltAll iusers", result, error)
-        res.status(STATUS_CODE.SUCCESS).send({ status: STATUS_CODE.SUCCESS, payload: result });
-      });
+    
   } catch (error) {
     res.status(STATUS_CODE.INTERNAL_SERVER_ERROR).send({ status: STATUS_CODE.INTERNAL_SERVER_ERROR, payload: error });
   }
