@@ -36,7 +36,7 @@ async function main() {
     console.log(content);
   };
   async function updateRoboStatus(status)  {
-    const rawResponse = await fetch(backend+"/api/robots/updateStatus", {
+    const rawResponse = await fetch(backend+"/api/robots/changeRobotStatus", {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -143,12 +143,14 @@ async function main() {
           userId:localStorage.getItem("user_Id"),//"11"//localStorage.getItem("userId")
         }
       postLocation(location);
-
-      let rStatus = {
-        id:localStorage.getItem("roboId"),//"6085e0af84f5e35f52505cb8",//
-        status:robotStatus
-      }
-      updateRoboStatus(rStatus);
+ 
+      const data = {
+        roboState: MoveActionPrev === "stop" && MoveAction!="stop" ? "Active" : MoveAction==="stop"?"InActive":"Active",
+        id: localStorage.getItem("roboId"),
+        timeStamp: new Date(),
+      };
+      
+      updateRoboStatus(data);
 
       let serviceOperation = {
         roboId:localStorage.getItem("roboId"),//"6085e0af84f5e35f52505cb8",//

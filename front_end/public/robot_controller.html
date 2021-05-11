@@ -22,15 +22,15 @@
 
 var NavigationControlInstance;
 
-var move_forward_down = function () {console.log("move_forward pressed"); MoveAction = "forward"; robotStatus = "active"; SyncJobFunction()};
+var move_forward_down = function () {console.log("move_forward pressed"); MoveAction = "forward"; robotStatus = "Active"; SyncJobFunction()};
 var move_forward_up = function () {console.log("move_forward released"); MoveAction = "";};
-var move_left_down = function () {console.log("move_left pressed"); MoveAction = "left";robotStatus = "active"; SyncJobFunction()};
+var move_left_down = function () {console.log("move_left pressed"); MoveAction = "left";robotStatus = "Active"; SyncJobFunction()};
 var move_left_up = function () {console.log("move_left released"); MoveAction = "";};
-var move_right_down = function () {console.log("move_right pressed"); MoveAction = "right";robotStatus = "active"; SyncJobFunction()};
+var move_right_down = function () {console.log("move_right pressed"); MoveAction = "right";robotStatus = "Active"; SyncJobFunction()};
 var move_right_up = function () {console.log("move_right released"); MoveAction = "";};
-var move_backward_down = function () {console.log("move_backward pressed"); MoveAction = "backward"; robotStatus = "active"; SyncJobFunction()};
+var move_backward_down = function () {console.log("move_backward pressed"); MoveAction = "backward"; robotStatus = "Active"; SyncJobFunction()};
 var move_backward_up = function () {console.log("move_backward released"); MoveAction = "";};
-var move_stop_down = function () {console.log("move_stop pressed"); MoveAction = "stop"; robotStatus = "inactive"; SyncJobFunction()};
+var move_stop_down = function () {console.log("move_stop pressed"); MoveAction = "stop"; robotStatus = "InActive"; SyncJobFunction()};
 var move_stop_up = function () {console.log("move_stop released"); MoveAction = "";};
 var map_save = function () { SaveMapFunction(); }
 var go_to_target = function() { GoToTargetFunction(NavigationControlInstance.state.x, NavigationControlInstance.state.y, NavigationControlInstance.state.heading) }
