@@ -29,6 +29,7 @@ function logout() {
     localStorage.removeItem('user_ln');
     localStorage.removeItem('user_role');
     localStorage.removeItem('user_Id');
+    localStorage.removeItem('roboId');
 }
 
 function register(user) {
