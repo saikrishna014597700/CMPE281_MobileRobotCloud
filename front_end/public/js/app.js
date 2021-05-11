@@ -109,6 +109,7 @@ async function main() {
         MoveActionPrev = MoveAction;
         shouldPublish = true;
         console.log("here "+this.x);
+        console.log("localStorage :: ", localStorage.getItem("roboId"))
         let location = {
           x:locationoo.x,
           y:locationoo.y,

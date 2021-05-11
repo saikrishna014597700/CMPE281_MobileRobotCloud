@@ -17,7 +17,8 @@ class ChooseRobots extends Component {
         history.push("/createRobot")
     }
     chooseRobot = (e, id) => {
-        history.push("/moveARobot", id)
+        localStorage.setItem("roboId",id);
+        history.push("/navigation", id)
     }
     componentDidMount() {
         console.log("UI", localStorage.getItem('user_Id'))

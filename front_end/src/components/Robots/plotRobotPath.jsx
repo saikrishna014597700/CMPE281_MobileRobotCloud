@@ -43,6 +43,7 @@ class PlotRobotPath extends Component {
                     let roboPath = response.data.roboPath
                     for (let element = 0; element < roboPath.length; element++) {
                         const path = roboPath[element]
+                        console.log("path::: ", path)
                         const obj = {
                             x: path.x,
                             y: path.y
