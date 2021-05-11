@@ -20,12 +20,9 @@ class ChooseRobots extends Component {
         history.push("/moveARobot", id)
     }
     componentDidMount() {
+        console.log("UI", localStorage.getItem('user_Id'))
         axios
             .get(backend + "/api/robots/allRegRobots", {
-                params: {
-                    user_id: localStorage.getItem('user_Id')
-                }
-            }, {
                 headers: {
                     "Content-Type": "application/json"
                 }

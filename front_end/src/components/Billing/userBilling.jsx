@@ -3,7 +3,6 @@ import "../../App.css";
 import axios from "axios";
 import { backend } from "../../webConfig";
 import { UserSidebar } from "../Util/UserLayout";
-import roboImage from "../Util/roboImage.jpeg";
 
 class UserBilling extends Component {
   constructor(props) {
@@ -13,9 +12,9 @@ class UserBilling extends Component {
     };
   }
   componentDidMount() {
+    console.log("UI", localStorage.getItem('user_Id'))
     axios
       .get(
-        // backend + "/api/account/userBilling",
         backend + "/api/robots/robotsByUser",
         {
           params: {
@@ -30,8 +29,6 @@ class UserBilling extends Component {
       )
       .then((response) => {
         if (response.data) {
-          console.log("robots Billing by user ", response.data);
-          // this.setState({ billing: response.data.payload[0].summ });
           this.setState({ billing: response?.data });
         }
       });
@@ -43,80 +40,45 @@ class UserBilling extends Component {
     let robotTable = billing.map((robot) => {
       total = total + robot.runTime * (1 / 60);
       return (
-        <div>
-          {/* <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Robo Name</th>
-                <th scope="col">Runtime in seconds</th>
-                <th scope="col">Amount</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>{robot.roboId}</td>
-                <td>{robot.roboName}</td>
-                <td>{robot.runTime}</td>
-                <td>{robot.runTime * (1 / 60)}</td>
-              </tr>
-            </tbody>
-          </table> */}
-          {/* <table> */}
-          <table class="table">
-            <tbody>
-              <tr>
-                <td>{robot.roboId}</td>
-                <td>{robot.roboName}</td>
-                <td>{robot.runTime}</td>
-                <td>{robot.runTime * (1 / 60)}</td>
-              </tr>
-            </tbody>
-          </table>
-          {/* </table> */}
-        </div>
+        <tr>
+          <td>{robot.roboId}</td>
+          <td>{robot.roboName}</td>
+          <td>{robot.runTime}</td>
+          <td>{Math.round(((robot.runTime * (1 / 60)) * 100) / 100).toFixed(2)}</td>
+        </tr>
       );
     });
     return (
       <div>
         <UserSidebar>
           <br />
-          <h2 style={{ marginLeft: "10%", fontSize: "20px" }}>
-            {" "}
-            {/* User Billing Info : {billing} */}
+          <br />
+          <h2 style={{ marginLeft: "40%", fontSize: "20px" }}>
+            User Billing Amount
           </h2>
           <br />
-          {/* <p style={{ marginLeft: "10%" }}>This billing is based on the time that you have spend working on all the registered robots... More info will ne provided on this screen in our next update</p> */}
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Robo Name</th>
-                <th scope="col">Runtime in seconds</th>
-                <th scope="col">Amount($)</th>
-              </tr>
-            </thead>
-            {/* <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Robo1</td>
-                <td>1800</td>
-                <td>0.5 USD</td>
-              </tr>
-              {robotTable}
-            </tbody> */}
-          </table>
-          {robotTable}
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Total</th>
-                <th scope="col">-</th>
-                <th scope="col">-</th>
-                <th scope="col">{total}</th>
-              </tr>
-            </thead>
-          </table>
+          <br />
+          <div style={{ marginLeft: "30px", marginRight: "30px" }}>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Robot Id</th>
+                  <th scope="col">Robot Name</th>
+                  <th scope="col">Runtime (seconds)</th>
+                  <th scope="col">Amount ($)</th>
+                </tr>
+              </thead>
+              <tbody>
+                {robotTable}
+                <tr>
+                  <th scope="col">Total Billing Amount</th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                  <th scope="col">${(Math.round(total * 100) / 100).toFixed(2)}</th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </UserSidebar>
       </div>
     );
