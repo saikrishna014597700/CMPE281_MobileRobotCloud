@@ -28,6 +28,7 @@ function logout() {
     localStorage.removeItem('user_fn');
     localStorage.removeItem('user_ln');
     localStorage.removeItem('user_role');
+    localStorage.removeItem('user_Id');
 }
 
 function register(user) {

@@ -13,7 +13,7 @@ const UserDashboard = () => {
     localStorage.setItem("user_fn", UserDetails.first_name);
     localStorage.setItem("user_ln", UserDetails.last_name);
     localStorage.setItem("user_role", UserDetails.role);
-    localStorage.setItem("userId", UserDetails.user_id);
+    localStorage.setItem("user_Id", UserDetails.user_id);
   }
   return (
     <UserSidebar>
