@@ -140,7 +140,7 @@ async function main() {
           x:locationoo.x,
           y:locationoo.y,
           id:localStorage.getItem("roboId"),//"6085e0af84f5e35f52505cb8",//
-          userId:localStorage.getItem("userId"),//"11"//localStorage.getItem("userId")
+          userId:localStorage.getItem("user_Id"),//"11"//localStorage.getItem("userId")
         }
       postLocation(location);
 
@@ -152,7 +152,7 @@ async function main() {
 
       let serviceOperation = {
         roboId:localStorage.getItem("roboId"),//"6085e0af84f5e35f52505cb8",//
-        userId:localStorage.getItem("userId"),//"11"//localStorage.getItem("userId")
+        userId:localStorage.getItem("user_Id"),//"11"//localStorage.getItem("userId")
       }
 
       updateServiceOperations(serviceOperation);

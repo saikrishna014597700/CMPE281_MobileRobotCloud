@@ -20,7 +20,6 @@ import MoveARobot from "./Robots/moveARobot";
 import RobotPath from "./Robots/robotPath";
 import PlotRobotPath from "./Robots/plotRobotPath";
 import UserBilling from "./Billing/userBilling";
-// import GameBoard from "./RoboMaker/GameBoard";
 
 class Main extends Component {
     render() {
@@ -37,7 +36,7 @@ class Main extends Component {
                 <Route path="/activeRobots" component={ActiveRobots} />
                 <Route path="/activeUserRobots" component={ActiveUserRobots} />
                 <Route path="/stateDistribution" component={AdminStateDistribution} />
-                <Route path="/moveRobot" component={MoveRobot} />
+                <Route path="/operations" component={MoveRobot} />
                 <Route path="/chooseRobot" component={ChooseRobot} />
                 <Route path="/createRobot" component={CreateRobot} />
                 <Route path="/robotStatus" component={RobotStatus} />
@@ -45,7 +44,7 @@ class Main extends Component {
                 <Route path="/robotPath" component={RobotPath} />
                 <Route path="/plotRobotPath" component={PlotRobotPath} />
                 <Route path="/userBilling" component={UserBilling} />
-                <Route exact path="/navigation" render={() => {window.location.href="./robot_controller.html"}} />
+                <Route path="/navigation" render={() => {window.open("./robot_controller.html");}} />
                 
                 
             </div>

@@ -18,12 +18,18 @@ class ChooseRobots extends Component {
     }
     chooseRobot = (e, id) => {
         localStorage.setItem("roboId",id);
-        history.push("/navigation", id)
+        window.open("./robot_controller.html")
+        //history.push("/navigation", id)
     }
     componentDidMount() {
         console.log("UI", localStorage.getItem('user_Id'))
         axios
-            .get(backend + "/api/robots/allRegRobots", {
+            .get(backend + "/api/robots/allRegRobots",{params:
+            
+            {
+                user_id:localStorage.getItem("user_Id")
+            }
+            }, {
                 headers: {
                     "Content-Type": "application/json"
                 }
@@ -59,8 +65,8 @@ class ChooseRobots extends Component {
                                 onClick={e => this.chooseRobot(e, robot._id)}
                                 type="submit"
                             >
-                                Choose
-              </button>
+                                Play
+                            </button>
 
                             <br />
                             <br />

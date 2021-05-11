@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const robots = require("../models/robots.js");
+const pool = require("../utils/mysqlConnection");
 var ObjectId = require("mongodb").ObjectID;
 
 router.get("/allActiveRobots", async (req, response) => {
@@ -69,6 +70,54 @@ router.get("/allRegRobots", async (req, response) => {
     .catch((err) => {
       response.status(500).json({ error: err });
     });
+});
+
+router.get("/getOperationsInfo", async (req, response) => {
+  let returnArr = [];
+  console.log("hello")
+  if (req.query.user_id) {
+    await robots
+      .find({ userId: req.query.user_id })
+      .exec()
+      .then(async (robots) => {
+        //console.log("robots :: ", robots.length)
+         await  robots.map(async (robo)=>{
+            let obj = {
+              _id: robo._id,
+              roboId: robo.roboId,
+              roboState:robo.roboState,
+              userId: robo.userId,
+              roboName:robo.roboName
+            }; 
+            await pool.query(`select * from billing_details where  user_id = ${obj.userId} and roboId = '${obj._id}'`,
+            
+            async (error, result) => {
+              //console.log(error) 
+              if(result.length >0){
+                console.log(result[0].operations)
+                obj.serviceOperations = await result[0].operations;
+                console.log("obj ::", obj )
+              }else{
+                obj.serviceOperations = 0;
+              }
+              returnArr.push(obj);
+              
+            })
+          
+
+          })
+
+          setTimeout(()=>{
+          response.status(200).json(returnArr)}, 500)
+      
+      })
+      .catch((err) => {
+        console.log("error ::: ", err)
+        response.status(500).json({ error: err });
+      });
+      
+  }
+  
 });
 
 router.post("/createRobot", async (req, response) => {

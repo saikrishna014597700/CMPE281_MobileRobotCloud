@@ -29,10 +29,7 @@ export const NavbarUser = () => {
                 title: "Choose Robot",
                 itemId: "/chooseRobot",
               },
-              {
-                title: "Move Robot",
-                itemId: "/moveRobot",
-              },
+             
               {
                 title: "Robot Status",
                 itemId: "/robotStatus",
@@ -44,7 +41,12 @@ export const NavbarUser = () => {
               {
                 title: "Active Robots",
                 itemId: "/activeUserRobots",
-              }
+              },
+              {
+                title: "Service Operations",
+                itemId: "/operations",
+              },
+
             ],
           },
           {

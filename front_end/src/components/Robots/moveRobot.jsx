@@ -19,7 +19,7 @@ class MoveRobot extends Component {
 
   componentDidMount() {
     axios
-      .get(backend + "/api/robots/allRegRobots", {
+      .get(backend + "/api/robots/getOperationsInfo", {
         params: {
           user_id: localStorage.getItem('user_Id')
         }
@@ -36,47 +36,48 @@ class MoveRobot extends Component {
   }
 
   render() {
-    let robots = this.state.robots.map(
-      robot => {
-        return (
-          <div class="col-sm-4 o">
-            <div class="card2">
-              <div class="wrapper">
-                <img
-                  src={roboImage}
-                  class="image--cover2"
-                ></img>
+    let robots;
+    if(this.state.robots.length>0){
+      robots = this.state.robots.map(
+        robot => {
+          return (
+            <div class="col-sm-4 o">
+              <div class="card2">
+                <div class="wrapper">
+                  <img
+                    src={roboImage}
+                    class="image--cover2"
+                  ></img>
+                </div>
+                <h2>Robot id: {robot.roboId}  </h2>
+                <br />
+                <h2>Robot State: {robot.roboState} </h2>
+                <br />
+                <h2>Robot Name: {robot.roboName} </h2>
+                <br />
+                <h2>Service Operations: {robot.serviceOperations}</h2>
+                
+  
+                <br />
+                <br />
+                <br />
               </div>
-              <h2>Robot id: {robot.roboId}  </h2>
-              <br />
-              <h2>Robot State: {robot.roboState} </h2>
-              <br />
-              <h2>Robot Name: {robot.roboName} </h2>
-              <br />
-              <h2>Run Time: {robot.runTime}</h2>
-              <button
-                class="btn btn-success"
-                onClick={e => this.chooseRobot(e, robot._id)}
-                type="submit"
-              >
-                Move
-              </button>
-
-              <br />
-              <br />
-              <br />
             </div>
-          </div>
-        );
-      }
-    );
+          );
+        }
+      );
+
+    }else{
+      robots = <div style = {{marginLeft:"20%", marginTop:"20%", fontWeight:"bold"}}> You dont have any service Operations yet</div>
+    }
+   
     return (
       <div>
         <UserSidebar>
           <br />
-          <h2 style={{ marginLeft: "10%", fontSize: "20px" }}> Move Robots</h2>
+          <h2 style={{ marginLeft: "10%", fontSize: "20px" }}> Service operations</h2>
           <div className="row">
-            {robots}
+            {robots }
           </div>
         </UserSidebar>
       </div >

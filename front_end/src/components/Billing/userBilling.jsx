@@ -18,7 +18,7 @@ class UserBilling extends Component {
         backend + "/api/robots/robotsByUser",
         {
           params: {
-            userId: localStorage.getItem("userId"),
+            userId: localStorage.getItem("user_Id"),
           },
         },
         {
