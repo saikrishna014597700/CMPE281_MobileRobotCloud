@@ -20,7 +20,7 @@ import MoveARobot from "./Robots/moveARobot";
 import RobotPath from "./Robots/robotPath";
 import PlotRobotPath from "./Robots/plotRobotPath";
 import UserBilling from "./Billing/userBilling";
-import GameBoard from "./RoboMaker/GameBoard";
+// import GameBoard from "./RoboMaker/GameBoard";
 
 class Main extends Component {
     render() {

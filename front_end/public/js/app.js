@@ -8,13 +8,32 @@ var GoToTargetFunction;
 var MoveAction = "";
 var MoveActionPrev = "";
 var SyncLastTime = 0;
+var locationoo = {
+  x : 0,
+  y: 0
+}
 
+var backend = "http://localhost:3001";
 async function main() {
 
   // FIXME: 直接Credentialを指定する場合に有効にする ->
   //const credentials = await getRawCredentials();
   
   // <-
+
+ 
+  async function postLocation(location)  {
+    const rawResponse = await fetch(backend+"/api/robots/changeRobotPath", {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(location)
+    });
+    const content = await rawResponse.json();
+    console.log(content);
+  };
   async function getCognitoCredentials() {
     AWS.config.region = region;
     var cognitoidentity = new AWS.CognitoIdentity();
@@ -54,19 +73,25 @@ async function main() {
       }
   });
 
+  var x = 0;
+  var y = 0;
   deviceIot.on('message', function(_topic, payload) {
     var json = JSON.parse(payload.toString());
     let command = json["command"];
     if (command == "location") {
-
       let odom = json["odom"];
       if (odom) {
         OdometryControlInstance.setState({
-          x:odom["x"].toFixed(4),
-          y:odom["y"].toFixed(4),
-          z:odom["z"].toFixed(4),
-          h:(odom["yaw"] * ( 180 / Math.PI )).toFixed(4)
+          x:odom["x"].toFixed(2),
+          y:odom["y"].toFixed(2),
+          z:odom["z"].toFixed(2),
+          h:(odom["yaw"] * ( 180 / Math.PI )).toFixed(2)
         })
+        locationoo.x = odom["x"];
+        locationoo.y = odom["y"];
+        
+        // console.log(this.y);
+                
       }
     }
     else if (command == "result") {
@@ -83,6 +108,15 @@ async function main() {
       if (MoveAction != MoveActionPrev) {
         MoveActionPrev = MoveAction;
         shouldPublish = true;
+        console.log("here "+this.x);
+        let location = {
+          x:locationoo.x,
+          y:locationoo.y,
+          id:"6085e0af84f5e35f52505cb8",
+          userId:"11"
+        }
+        
+      postLocation(location);
       }
       let t = (new Date()).getTime();
       if (t > SyncLastTime + 1500) {

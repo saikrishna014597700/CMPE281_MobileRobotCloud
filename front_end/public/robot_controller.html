@@ -94,7 +94,7 @@ class Controller extends React.Component {
 class Odometry extends React.Component {
   constructor(props) {
     super(props);
-    
+    OdometryControlInstance = this;
     this.state = { x: 0, y:0, z:0, h:0 };
   }  
   render() {
@@ -109,7 +109,7 @@ class Odometry extends React.Component {
         <div class="odom_value_x">{this.state.x}</div>
         <div class="odom_value_y">{this.state.y}</div>
         <div class="odom_value_z">{this.state.z}</div>
-        <div class="odom_value_heading">{this.state.h}</div>
+       
       </div>
     );
   }
