@@ -8,6 +8,7 @@ var GoToTargetFunction;
 var MoveAction = "";
 var MoveActionPrev = "";
 var SyncLastTime = 0;
+var robotStatus = "connected";
 var locationoo = {
   x : 0,
   y: 0
@@ -30,6 +31,31 @@ async function main() {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(location)
+    });
+    const content = await rawResponse.json();
+    console.log(content);
+  };
+  async function updateRoboStatus(status)  {
+    const rawResponse = await fetch(backend+"/api/robots/updateStatus", {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(status)
+    });
+    const content = await rawResponse.json();
+    console.log(content);
+  };
+
+  async function updateServiceOperations(serviceOps)  {
+    const rawResponse = await fetch(backend+"/api/users/updateServiceOperations", {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(serviceOps)
     });
     const content = await rawResponse.json();
     console.log(content);
@@ -113,11 +139,23 @@ async function main() {
         let location = {
           x:locationoo.x,
           y:locationoo.y,
-          id:"6085e0af84f5e35f52505cb8",
-          userId:"11"
+          id:localStorage.getItem("roboId"),//"6085e0af84f5e35f52505cb8",//
+          userId:localStorage.getItem("userId"),//"11"//localStorage.getItem("userId")
         }
-        
       postLocation(location);
+
+      let rStatus = {
+        id:localStorage.getItem("roboId"),//"6085e0af84f5e35f52505cb8",//
+        status:robotStatus
+      }
+      updateRoboStatus(rStatus);
+
+      let serviceOperation = {
+        roboId:localStorage.getItem("roboId"),//"6085e0af84f5e35f52505cb8",//
+        userId:localStorage.getItem("userId"),//"11"//localStorage.getItem("userId")
+      }
+
+      updateServiceOperations(serviceOperation);
       }
       let t = (new Date()).getTime();
       if (t > SyncLastTime + 1500) {

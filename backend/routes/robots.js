@@ -77,7 +77,7 @@ router.post("/createRobot", async (req, response) => {
     _id: robotId,
     roboName: req.body.roboName,
     roboPath: req.body.robotPath,
-    roboState: "Active",
+    roboState: "connected",
     runTime: 0,
     userId: req.body.userId,
     roboId: req.body.robotId,

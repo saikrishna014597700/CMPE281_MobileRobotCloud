@@ -22,15 +22,15 @@
 
 var NavigationControlInstance;
 
-var move_forward_down = function () {console.log("move_forward pressed"); MoveAction = "forward"; SyncJobFunction()};
+var move_forward_down = function () {console.log("move_forward pressed"); MoveAction = "forward"; robotStatus = "active"; SyncJobFunction()};
 var move_forward_up = function () {console.log("move_forward released"); MoveAction = "";};
-var move_left_down = function () {console.log("move_left pressed"); MoveAction = "left"; SyncJobFunction()};
+var move_left_down = function () {console.log("move_left pressed"); MoveAction = "left";robotStatus = "active"; SyncJobFunction()};
 var move_left_up = function () {console.log("move_left released"); MoveAction = "";};
-var move_right_down = function () {console.log("move_right pressed"); MoveAction = "right"; SyncJobFunction()};
+var move_right_down = function () {console.log("move_right pressed"); MoveAction = "right";robotStatus = "active"; SyncJobFunction()};
 var move_right_up = function () {console.log("move_right released"); MoveAction = "";};
-var move_backward_down = function () {console.log("move_backward pressed"); MoveAction = "backward"; SyncJobFunction()};
+var move_backward_down = function () {console.log("move_backward pressed"); MoveAction = "backward"; robotStatus = "active"; SyncJobFunction()};
 var move_backward_up = function () {console.log("move_backward released"); MoveAction = "";};
-var move_stop_down = function () {console.log("move_stop pressed"); MoveAction = "stop"; SyncJobFunction()};
+var move_stop_down = function () {console.log("move_stop pressed"); MoveAction = "stop"; robotStatus = "inactive"; SyncJobFunction()};
 var move_stop_up = function () {console.log("move_stop released"); MoveAction = "";};
 var map_save = function () { SaveMapFunction(); }
 var go_to_target = function() { GoToTargetFunction(NavigationControlInstance.state.x, NavigationControlInstance.state.y, NavigationControlInstance.state.heading) }
@@ -105,7 +105,6 @@ class Odometry extends React.Component {
         <div class="odom_x">x</div>
         <div class="odom_y">y</div>
         <div class="odom_z">z</div>
-        <div class="odom_heading">heading</div>
         <div class="odom_value_x">{this.state.x}</div>
         <div class="odom_value_y">{this.state.y}</div>
         <div class="odom_value_z">{this.state.z}</div>
@@ -168,10 +167,7 @@ class GameBoard extends React.Component {
                 <Controller/>
                 <Odometry/>
           </div>
-          <div class="bottom">
-            <Navigation/>
-            <SaveMap/>
-          </div>
+          
         </div>
     );
   }
