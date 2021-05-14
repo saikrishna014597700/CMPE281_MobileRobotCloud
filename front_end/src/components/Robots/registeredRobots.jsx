@@ -5,6 +5,8 @@ import { backend } from "../../webConfig";
 import { Redirect } from "react-router";
 import { Sidebar } from "../Util/Layout";
 import roboImage from "../Util/robo3.jpeg";
+import Button from '@material-ui/core/Button';
+import { history } from '../Util/history';
 
 class RegisterdRobots extends Component {
     constructor(props) {
@@ -12,6 +14,9 @@ class RegisterdRobots extends Component {
         this.state = {
             robots: []
         };
+    }
+    chooseRobotPATH = (e, id) => {
+        history.push("/plotAdminRobotPath", id)
     }
     componentDidMount() {
         axios
@@ -44,6 +49,9 @@ class RegisterdRobots extends Component {
                             <h2>Robot State: {robot.roboState} </h2>
                             <br />
                             <h2>Run Time: {robot.runTime} </h2>
+                            <Button size="medium" color="primary" onClick={e => this.chooseRobotPATH(e, robot._id)}>
+                                    Path
+        </Button>
                         </div>
                     </div>
                 );

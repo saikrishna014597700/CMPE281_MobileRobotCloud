@@ -79,7 +79,7 @@ class ChooseRobots extends Component {
                                         Run Time: {robot.runTime}
                                     </Typography>
                                     <Typography variant="body2" color="textSecondary" component="p">
-                                        Robot Bill: {Math.round(((robot.runTime * (1 / 60)) * 100) / 100).toFixed(4)}
+                                        Robot Bill: {((robot.runTime * (1 / 60)) ).toFixed(2)}
                                     </Typography>
                                 </CardContent>
                             </CardActionArea>

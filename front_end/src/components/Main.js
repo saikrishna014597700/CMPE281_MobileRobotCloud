@@ -23,6 +23,7 @@ import UserBilling from "./Billing/userBilling";
 import AdminBilling from "./Billing/adminBilling";
 import TempDistri from "./StateDistribution/tempDistri";
 import TempDistriUser from "./StateDistribution/tempDistriUser";
+import PlotAdminRobotPath from "./Robots/plotAdminRobotPath"
 
 class Main extends Component {
     render() {
@@ -51,7 +52,7 @@ class Main extends Component {
                 <Route path="/userBilling" component={UserBilling} />
                 <Route path="/adminBilling" component={AdminBilling} />
                 <Route path="/navigation" render={() => { window.open("./robot_controller.html"); }} />
-
+                <Route path = "/plotAdminRobotPath" component = {PlotAdminRobotPath}/>
 
             </div>
         );

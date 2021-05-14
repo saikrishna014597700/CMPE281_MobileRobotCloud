@@ -49,7 +49,7 @@ class UserBilling extends Component {
         return "rgb(" + r + "," + g + "," + b + ")";
       };
       labels.push(order.roboId);
-      data.push(Math.round(((order.runTime * (1 / 60)) * 100) / 100).toFixed(4));
+      data.push((order.runTime * (1 / 60)).toFixed(2));
       backgroundColor.push(dynamicColors());
     });
     var state = {};
