@@ -43,7 +43,7 @@ function Login() {
 
   return (
     <div className="Login-component">
-      <div className="col-lg-8 offset-lg-2" style={{ width: "25%", marginLeft: "35%", marginTop: "10%", borderStyle: "groove", borderRadius: "20px" }}>
+      <div className="col-lg-8 offset-lg-2" style={{ width: "30%", marginLeft: "30%", marginTop: "10%", borderStyle: "groove", borderRadius: "20px" }}>
         <br />
         <br />
         <br />

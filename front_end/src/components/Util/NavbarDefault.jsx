@@ -8,7 +8,7 @@ export const NavbarDefault = () => {
     let userDetails;
     let url = window.location.href;
     if (localStorage.getItem('user_fn') && !url.includes("/login")) {
-        userDetails = <div style={{ color: "white", marginLeft: "75%" }}>{localStorage.getItem('user_fn')}{" "}{localStorage.getItem('user_ln')}{" : "}{localStorage.getItem('user_role')}</div>;
+        userDetails = <div style={{ color: "white", marginLeft: "30%", fontWeight: "bold" }}>{localStorage.getItem('user_fn')}{" "}{localStorage.getItem('user_ln')}{" : "}{localStorage.getItem('user_role')}</div>;
     }
     return (
         <div style={{ backgroundColor: "#2874A6" }}>
@@ -17,7 +17,7 @@ export const NavbarDefault = () => {
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-                    <a class="navbar-brand" href="#" style={{ color: "white" }}>Mobile Robot Cloud</a>
+                    <a class="navbar-brand" href="#" style={{ color: "white", fontWeight: "bold", marginLeft: "45%" }}>Mobile Robot Cloud</a>
                     {userDetails}
                 </div>
             </nav>

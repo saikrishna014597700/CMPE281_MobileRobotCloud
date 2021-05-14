@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-
+import "./login.css";
 import { userActions } from '../../actions/user.action';
 
 function RegisterPage() {
@@ -36,59 +36,61 @@ function RegisterPage() {
     }
 
     return (
-        <div className="col-lg-8 offset-lg-2" style={{ width: "25%", marginLeft: "35%", marginTop: "10%", borderStyle: "groove", borderRadius: "20px" }}>
-            <h3 style={{ marginLeft: "40%" }}>Register</h3>
-            <form name="form" onSubmit={handleSubmit}>
-                <div className="form-group">
-                    <label>First Name</label>
-                    <input type="text" name="firstName" value={user.firstName} onChange={handleChange} className={'form-control' + (submitted && !user.firstName ? ' is-invalid' : '')} />
-                    {submitted && !user.firstName &&
-                        <div className="invalid-feedback">First Name is required</div>
-                    }
-                </div>
-                <div className="form-group">
-                    <label>Last Name</label>
-                    <input type="text" name="lastName" value={user.lastName} onChange={handleChange} className={'form-control' + (submitted && !user.lastName ? ' is-invalid' : '')} />
-                    {submitted && !user.lastName &&
-                        <div className="invalid-feedback">Last Name is required</div>
-                    }
-                </div>
-                <div className="form-group">
-                    <label>Username</label>
-                    <input type="text" name="username" value={user.username} onChange={handleChange} className={'form-control' + (submitted && !user.username ? ' is-invalid' : '')} />
-                    {submitted && !user.username &&
-                        <div className="invalid-feedback">Username is required</div>
-                    }
-                </div>
-                <div className="form-group">
-                    <label>Password</label>
-                    <input type="password" name="password" value={user.password} onChange={handleChange} className={'form-control' + (submitted && !user.password ? ' is-invalid' : '')} />
-                    {submitted && !user.password &&
-                        <div className="invalid-feedback">Password is required</div>
-                    }
-                </div>
-                <div className="form-group">
-                    <label>Role</label>
-                    <select
-                        name="role"
-                        onChange={handleChange}
-                        className={'form-control' + (submitted && !user.role ? ' is-invalid' : '')}
-                    >
-                        <option value="Admin">admin</option>
-                        <option value="User">user</option>
-                    </select>
-                    {submitted && !user.role &&
-                        <div className="invalid-feedback">Role is required</div>
-                    }
-                </div>
-                <div className="form-group">
-                    <button className="btn btn-primary">
-                        {registering && <span className="spinner-border spinner-border-sm mr-1"></span>}
-                        Register
+        <div className="Login-component">
+            <div className="col-lg-8 offset-lg-2" style={{ width: "25%", marginLeft: "35%", marginTop: "10%", borderStyle: "groove", borderRadius: "20px" }}>
+
+                <form name="form" onSubmit={handleSubmit}>
+                    <div className="form-group">
+                        <label>First Name</label>
+                        <input type="text" name="firstName" value={user.firstName} onChange={handleChange} className={'form-control' + (submitted && !user.firstName ? ' is-invalid' : '')} />
+                        {submitted && !user.firstName &&
+                            <div className="invalid-feedback">First Name is required</div>
+                        }
+                    </div>
+                    <div className="form-group">
+                        <label>Last Name</label>
+                        <input type="text" name="lastName" value={user.lastName} onChange={handleChange} className={'form-control' + (submitted && !user.lastName ? ' is-invalid' : '')} />
+                        {submitted && !user.lastName &&
+                            <div className="invalid-feedback">Last Name is required</div>
+                        }
+                    </div>
+                    <div className="form-group">
+                        <label>Username</label>
+                        <input type="text" name="username" value={user.username} onChange={handleChange} className={'form-control' + (submitted && !user.username ? ' is-invalid' : '')} />
+                        {submitted && !user.username &&
+                            <div className="invalid-feedback">Username is required</div>
+                        }
+                    </div>
+                    <div className="form-group">
+                        <label>Password</label>
+                        <input type="password" name="password" value={user.password} onChange={handleChange} className={'form-control' + (submitted && !user.password ? ' is-invalid' : '')} />
+                        {submitted && !user.password &&
+                            <div className="invalid-feedback">Password is required</div>
+                        }
+                    </div>
+                    <div className="form-group">
+                        <label>Role</label>
+                        <select
+                            name="role"
+                            onChange={handleChange}
+                            className={'form-control' + (submitted && !user.role ? ' is-invalid' : '')}
+                        >
+                            <option value="Admin">admin</option>
+                            <option value="User">user</option>
+                        </select>
+                        {submitted && !user.role &&
+                            <div className="invalid-feedback">Role is required</div>
+                        }
+                    </div>
+                    <div className="form-group">
+                        <button className="btn btn-primary">
+                            {registering && <span className="spinner-border spinner-border-sm mr-1"></span>}
+                            Register
                     </button>
-                    <Link to="/login" className="btn btn-link">Cancel</Link>
-                </div>
-            </form>
+                        <Link to="/login" className="btn btn-link">Cancel</Link>
+                    </div>
+                </form>
+            </div>
         </div>
     );
 }
