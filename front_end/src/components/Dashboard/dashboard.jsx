@@ -3,6 +3,9 @@ import React from "react";
 import { Sidebar } from "../Util/Layout";
 import { useSelector } from "react-redux";
 import roboImage from "../Util/cloudrobo.jpeg";
+import UserDashboard from "../UserDashboard/userdashboard";
+import AdminStateDistribution from "../StateDistribution/adminStateDistribution";
+import TempDistri from "../StateDistribution/tempDistri";
 
 const HomePage = () => {
   let UserDetails = {};
@@ -18,13 +21,7 @@ const HomePage = () => {
   return (
     <Sidebar>
       <br />
-      <h2>
-        Welcome {localStorage.getItem("user_fn")}{" "}
-        {localStorage.getItem("user_ln")}{" "}
-      </h2>
-      <br />
-      You logged in as an {localStorage.getItem("user_role")}
-      <br />
+      <TempDistri />
     </Sidebar>
   );
 };

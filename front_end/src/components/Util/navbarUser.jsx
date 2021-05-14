@@ -8,7 +8,7 @@ export const NavbarUser = () => {
   const history = useHistory();
   const location = useLocation();
   return (
-    <div style={{ width: "17%", backgroundColor: "#B1DCF1" }}>
+    <div style={{ width: "17%", backgroundColor: "#5499C7" }}>
       <Navigation
         activeItemId={location.pathname}
         onSelect={({ itemId }) => {
@@ -28,19 +28,6 @@ export const NavbarUser = () => {
               {
                 title: "Choose Robot",
                 itemId: "/chooseRobot",
-              },
-
-              {
-                title: "Robot Status",
-                itemId: "/robotStatus",
-              },
-              {
-                title: "Robot Path",
-                itemId: "/robotPath",
-              },
-              {
-                title: "Active Robots",
-                itemId: "/activeUserRobots",
               },
               {
                 title: "Service Operations",

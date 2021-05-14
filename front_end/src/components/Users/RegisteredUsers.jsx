@@ -42,6 +42,8 @@ class RegisterdUsers extends Component {
                             <h2>Name: {user.first_name} {user.last_name} </h2>
                             <br />
                             <h2>Role: {user.role} </h2>
+                            <br />
+                            <h2>Status: {user.is_active ? "Active" : "Inactive"} </h2>
                         </div>
                     </div>
                 );

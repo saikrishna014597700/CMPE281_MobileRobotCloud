@@ -4,7 +4,7 @@ import axios from "axios";
 import { backend } from "../../webConfig";
 import { Redirect } from "react-router";
 import { Sidebar } from "../Util/Layout";
-import roboImage from "../Util/roboImage.jpeg";
+import roboImage from "../Util/robo3.jpeg";
 
 class RegisterdRobots extends Component {
     constructor(props) {

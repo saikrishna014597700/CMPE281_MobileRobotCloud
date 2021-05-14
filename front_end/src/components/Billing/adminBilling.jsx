@@ -4,19 +4,22 @@ import axios from "axios";
 import { backend } from "../../webConfig";
 // import { Sidebar } from "../Util";
 import { Sidebar } from "../Util/Layout";
+import { Bar, Line, Pie } from "react-chartjs-2";
 
 class AdminBilling extends Component {
     constructor(props) {
         super(props);
         this.state = {
             billing: [],
+            chartData: []
         };
     }
     componentDidMount() {
         axios
             .get(
                 backend + "/api/robots/robotsByUser",
-                
+                {
+                },
                 {
                     headers: {
                         "Content-Type": "application/json",
@@ -33,6 +36,29 @@ class AdminBilling extends Component {
     render() {
         let billing = this.state.billing;
         let total = 0;
+        var labels = [];
+        var data = [];
+        var backgroundColor = [];
+        billing.map((order) => {
+            var dynamicColors = function () {
+                var r = Math.floor(Math.random() * 255);
+                var g = Math.floor(Math.random() * 255);
+                var b = Math.floor(Math.random() * 255);
+                return "rgb(" + r + "," + g + "," + b + ")";
+            };
+            labels.push(order.roboId);
+            data.push(Math.round(((order.runTime * (1 / 60)) * 100) / 100).toFixed(2));
+            backgroundColor.push(dynamicColors());
+        });
+        var state = {};
+        var datasets = [];
+        state.labels = labels;
+        var x = {};
+        x.label = "Billing amount($)";
+        x.data = data;
+        x.backgroundColor = backgroundColor;
+        datasets.push(x);
+        state.datasets = datasets;
         let robotTable = billing.map((robot) => {
             total = total + robot.runTime * (1 / 60);
             return (
@@ -40,21 +66,42 @@ class AdminBilling extends Component {
                     <td>{robot.roboId}</td>
                     <td>{robot.userId}</td>
                     <td>{Math.round(robot.runTime)}</td>
-                    <td>{Math.round(((robot.runTime * (1 / 60)) * 100) / 100).toFixed(2)}</td>
+                    <td>{Math.round(((robot.runTime * (1 / 60)) * 100) / 100).toFixed(4)}</td>
                 </tr>
             );
         });
+        let graph = (
+            <div style={{ marginLeft: "20%", marginRight: "20%" }}>
+                <Bar
+                    data={state}
+                    options={{
+                        title: {
+                            display: "State Distribution",
+                            text: "Billing Details",
+                            fontSize: 25,
+                        },
+                        scales: {
+                            yAxes: [
+                                {
+                                    ticks: {
+                                        beginAtZero: true,
+                                    },
+                                },
+                            ],
+                        },
+                    }}
+                />
+                <br />
+                <br />
+            </div>
+        );
         return (
             <div>
                 <Sidebar>
                     <br />
+                    {graph}
                     <br />
-                    <h2 style={{ marginLeft: "40%", fontSize: "20px" }}>
-                        User Billing Amount
-          </h2>
-                    <br />
-                    <br />
-                    <div style={{ marginLeft: "30px", marginRight: "30px" }}>
+                    <div style={{ marginLeft: "30px", marginRight: "30px", backgroundColor: "#D6EAF8" }}>
                         <table class="table">
                             <thead>
                                 <tr>

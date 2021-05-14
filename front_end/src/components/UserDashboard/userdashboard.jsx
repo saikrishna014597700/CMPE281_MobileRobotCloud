@@ -3,6 +3,7 @@ import React from "react";
 import { UserSidebar } from "../Util/UserLayout";
 import { useSelector } from "react-redux";
 import roboImage from "../Util/cloudrobo.jpeg";
+import TempDistriUser from "../StateDistribution/tempDistriUser";
 
 const UserDashboard = () => {
   let UserDetails = {};
@@ -17,15 +18,9 @@ const UserDashboard = () => {
   }
   return (
     <UserSidebar>
-      <div className="component_all">
+      <div>
         <br />
-        <h2>
-          Welcome {localStorage.getItem("user_fn")}{" "}
-          {localStorage.getItem("user_ln")}{" "}
-        </h2>
-        <br />
-        You logged in as an {localStorage.getItem("user_role")}
-        <br />
+        <TempDistriUser />
       </div>
     </UserSidebar >
   );

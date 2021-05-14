@@ -29,10 +29,6 @@ export const Navbar = () => {
                                 title: 'Registered Users',
                                 itemId: '/registeredUsers',
                             },
-                            {
-                                title: 'Active Users',
-                                itemId: '/activeUsers',
-                            },
                         ],
                     },
                     {
@@ -44,10 +40,6 @@ export const Navbar = () => {
                                 title: 'Registered Robots',
                                 itemId: '/registeredRobots',
                             },
-                            {
-                                title: 'Active Robots',
-                                itemId: '/activeRobots',
-                            }
                         ],
                     },
                     {

@@ -11,7 +11,7 @@ export const NavbarDefault = () => {
         userDetails = <div style={{ color: "white", marginLeft: "75%" }}>{localStorage.getItem('user_fn')}{" "}{localStorage.getItem('user_ln')}{" : "}{localStorage.getItem('user_role')}</div>;
     }
     return (
-        <div style={{ backgroundColor: "#15A0E5" }}>
+        <div style={{ backgroundColor: "#2874A6" }}>
             <nav class="navbar navbar-expand-lg navbar-light">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>

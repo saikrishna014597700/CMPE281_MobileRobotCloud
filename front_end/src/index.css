@@ -34,6 +34,7 @@ code {
   height: 150px;
   border-radius: 50%;
   margin: 20px;
+  margin-left: 20%;
   margin-top: -0px;
   object-fit: cover;
   object-position: center;

@@ -21,6 +21,8 @@ import RobotPath from "./Robots/robotPath";
 import PlotRobotPath from "./Robots/plotRobotPath";
 import UserBilling from "./Billing/userBilling";
 import AdminBilling from "./Billing/adminBilling";
+import TempDistri from "./StateDistribution/tempDistri";
+import TempDistriUser from "./StateDistribution/tempDistriUser";
 
 class Main extends Component {
     render() {
@@ -37,6 +39,8 @@ class Main extends Component {
                 <Route path="/activeRobots" component={ActiveRobots} />
                 <Route path="/activeUserRobots" component={ActiveUserRobots} />
                 <Route path="/stateDistribution" component={AdminStateDistribution} />
+                <Route path="/tempDistri" component={TempDistri} />
+                <Route path="/tempDistriUser" component={TempDistriUser} />
                 <Route path="/operations" component={MoveRobot} />
                 <Route path="/chooseRobot" component={ChooseRobot} />
                 <Route path="/createRobot" component={CreateRobot} />

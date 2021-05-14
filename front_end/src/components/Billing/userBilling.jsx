@@ -3,6 +3,7 @@ import "../../App.css";
 import axios from "axios";
 import { backend } from "../../webConfig";
 import { UserSidebar } from "../Util/UserLayout";
+import { Bar, Line, Pie } from "react-chartjs-2";
 
 class UserBilling extends Component {
   constructor(props) {
@@ -37,6 +38,54 @@ class UserBilling extends Component {
   render() {
     let billing = this.state.billing;
     let total = 0;
+    var labels = [];
+    var data = [];
+    var backgroundColor = [];
+    billing.map((order) => {
+      var dynamicColors = function () {
+        var r = Math.floor(Math.random() * 255);
+        var g = Math.floor(Math.random() * 255);
+        var b = Math.floor(Math.random() * 255);
+        return "rgb(" + r + "," + g + "," + b + ")";
+      };
+      labels.push(order.roboId);
+      data.push(Math.round(((order.runTime * (1 / 60)) * 100) / 100).toFixed(4));
+      backgroundColor.push(dynamicColors());
+    });
+    var state = {};
+    var datasets = [];
+    state.labels = labels;
+    var x = {};
+    x.label = "Billing amount($)";
+    x.data = data;
+    x.backgroundColor = backgroundColor;
+    datasets.push(x);
+    state.datasets = datasets;
+    let graph = (
+      <div style={{ marginLeft: "20%", marginRight: "20%" }}>
+        <Bar
+          data={state}
+          options={{
+            title: {
+              display: "State Distribution",
+              text: "Billing Details",
+              fontSize: 25,
+            },
+            scales: {
+              yAxes: [
+                {
+                  ticks: {
+                    beginAtZero: true,
+                  },
+                },
+              ],
+            },
+          }}
+        />
+        <br />
+        <br />
+      </div>
+    );
     let robotTable = billing.map((robot) => {
       total = total + robot.runTime * (1 / 60);
       return (
@@ -53,12 +102,9 @@ class UserBilling extends Component {
         <UserSidebar>
           <br />
           <br />
-          <h2 style={{ marginLeft: "40%", fontSize: "20px" }}>
-            User Billing Amount
-          </h2>
+          {graph}
           <br />
-          <br />
-          <div style={{ marginLeft: "30px", marginRight: "30px" }}>
+          <div style={{ marginLeft: "30px", marginRight: "30px", backgroundColor: "#D6EAF8" }}>
             <table class="table">
               <thead>
                 <tr>

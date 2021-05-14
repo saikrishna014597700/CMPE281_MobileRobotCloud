@@ -3,7 +3,7 @@ import "../../App.css";
 import axios from "axios";
 import { backend } from "../../webConfig";
 import { UserSidebar } from "../Util/UserLayout";
-import roboImage from "../Util/roboImage.jpeg";
+import roboImage from "../Util/robo3.jpeg";
 import { history } from '../Util/history';
 
 class MoveRobot extends Component {
@@ -37,7 +37,7 @@ class MoveRobot extends Component {
 
   render() {
     let robots;
-    if(this.state.robots.length>0){
+    if (this.state.robots.length > 0) {
       robots = this.state.robots.map(
         robot => {
           return (
@@ -56,10 +56,6 @@ class MoveRobot extends Component {
                 <h2>Robot Name: {robot.roboName} </h2>
                 <br />
                 <h2>Service Operations: {robot.serviceOperations}</h2>
-                
-  
-                <br />
-                <br />
                 <br />
               </div>
             </div>
@@ -67,17 +63,17 @@ class MoveRobot extends Component {
         }
       );
 
-    }else{
-      robots = <div style = {{marginLeft:"20%", marginTop:"20%", fontWeight:"bold"}}> You dont have any service Operations yet</div>
+    } else {
+      robots = <div style={{ marginLeft: "20%", marginTop: "20%", fontWeight: "bold" }}> You dont have any service Operations yet</div>
     }
-   
+
     return (
       <div>
         <UserSidebar>
           <br />
           <h2 style={{ marginLeft: "10%", fontSize: "20px" }}> Service operations</h2>
           <div className="row">
-            {robots }
+            {robots}
           </div>
         </UserSidebar>
       </div >

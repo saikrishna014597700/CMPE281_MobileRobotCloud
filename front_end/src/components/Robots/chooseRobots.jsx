@@ -5,6 +5,14 @@ import { backend } from "../../webConfig";
 import { UserSidebar } from "../Util/UserLayout";
 import roboImage from "../Util/roboImage.jpeg";
 import { history } from '../Util/history';
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 
 class ChooseRobots extends Component {
     constructor(props) {
@@ -16,19 +24,23 @@ class ChooseRobots extends Component {
     createRobot = e => {
         history.push("/createRobot")
     }
+    chooseRobotPATH = (e, id) => {
+        history.push("/plotRobotPath", id)
+    }
     chooseRobot = (e, id) => {
-        localStorage.setItem("roboId",id);
+        localStorage.setItem("roboId", id);
         window.open("./robot_controller.html")
         //history.push("/navigation", id)
     }
     componentDidMount() {
         console.log("UI", localStorage.getItem('user_Id'))
         axios
-            .get(backend + "/api/robots/allRegRobots",{params:
-            
-            {
-                user_id:localStorage.getItem("user_Id")
-            }
+            .get(backend + "/api/robots/allRegRobots", {
+                params:
+
+                {
+                    user_id: localStorage.getItem("user_Id")
+                }
             }, {
                 headers: {
                     "Content-Type": "application/json"
@@ -46,32 +58,42 @@ class ChooseRobots extends Component {
             robot => {
                 return (
                     <div class="col-sm-4 o">
-                        <div class="card2">
-                            <div class="wrapper">
-                                <img
-                                    src={roboImage}
-                                    class="image--cover2"
-                                ></img>
-                            </div>
-                            <h2>Robot id: {robot.roboId}  </h2>
-                            <br />
-                            <h2>Robot State: {robot.roboState} </h2>
-                            <br />
-                            <h2>Robot Name: {robot.roboName} </h2>
-                            <br />
-                            <h2>Run Time: {robot.runTime}</h2>
-                            <button
-                                class="btn btn-success"
-                                onClick={e => this.chooseRobot(e, robot._id)}
-                                type="submit"
-                            >
-                                Play
-                            </button>
+                        <Card style={{ maxWidth: "345px" }}>
+                            <CardActionArea>
+                                <CardMedia
+                                    style={{ height: "180px" }}
+                                    image={roboImage}
+                                    title="Contemplative Reptile"
+                                />
+                                <CardContent>
+                                    <Typography gutterBottom variant="h5" component="h2">
+                                        {robot.roboName}
+                                    </Typography>
+                                    <Typography variant="body2" color="textSecondary" component="p">
+                                        Robot id: {robot.roboId}
+                                    </Typography>
+                                    <Typography variant="body2" color="textSecondary" component="p">
+                                        Robot State: {robot.roboState}
+                                    </Typography>
+                                    <Typography variant="body2" color="textSecondary" component="p">
+                                        Run Time: {robot.runTime}
+                                    </Typography>
+                                    <Typography variant="body2" color="textSecondary" component="p">
+                                        Robot Bill: {Math.round(((robot.runTime * (1 / 60)) * 100) / 100).toFixed(4)}
+                                    </Typography>
+                                </CardContent>
+                            </CardActionArea>
+                            <CardActions>
+                                <Button size="medium" color="primary" onClick={e => this.chooseRobot(e, robot._id)}>
+                                    Play
+        </Button>
+                                <Button size="medium" color="primary" onClick={e => this.chooseRobotPATH(e, robot._id)}>
+                                    Path
+        </Button>
+                            </CardActions>
+                        </Card>
 
-                            <br />
-                            <br />
-                            <br />
-                        </div>
+
                     </div>
                 );
             }
@@ -88,7 +110,9 @@ class ChooseRobots extends Component {
               </button>{' '}</div>
                     <br />
                     <h2 style={{ marginLeft: "10%", fontSize: "20px" }}> Existing Robots</h2>
-                    <div className="row">
+                    <br />
+                    <br />
+                    <div className="row" style={{ marginLeft: "5%", }}>
                         {robots}
                     </div>
                 </UserSidebar>

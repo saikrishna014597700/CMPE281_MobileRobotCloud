@@ -6,7 +6,7 @@ import { Sidebar } from "../Util/Layout";
 import roboImage from "../Util/roboImage.jpeg";
 import { Bar, Line, Pie } from "react-chartjs-2";
 
-class AdminStateDistribution extends Component {
+class TempDistri extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -80,7 +80,7 @@ class AdminStateDistribution extends Component {
         console.log("chartData", this.state.chartData)
         let graph = (
             <div style={{ marginLeft: "20%", marginRight: "20%" }}>
-                <Bar
+                <Pie
                     data={this.state.chartData}
                     options={{
                         title: {
@@ -101,78 +101,42 @@ class AdminStateDistribution extends Component {
                 />
                 <br />
                 <br />
-                <Pie
-                    data={this.state.chartData}
-                    options={{
-                        title: {
-                            display: "State Distribution",
-                            text: "State Distribution graph",
-                            fontSize: 25,
-                        },
-                        legend: {
-                            display: this.props.displayLegend,
-                            position: this.props.legendPosition,
-                        },
-                    }}
-                />
-                <br />
-                <br />
-
-                <Line
-                    data={this.state.chartData}
-                    options={{
-                        title: {
-                            display: 'State Distribution',
-                            text: "State Distribution",
-                            fontSize: 25,
-                        },
-                        legend: {
-                            display: this.props.displayLegend,
-                            position: this.props.legendPosition,
-                        },
-                    }}
-                />
-                <br />
-                <br />
             </div>
 
         );
         return (
             <div>
-                <Sidebar>
+                <br />
+                {graph}
+                <br />
+                <div style={{ marginLeft: "50px", marginRight: "50px", backgroundColor: "#D6EAF8" }}>
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th scope="col">No of Active robots</th>
+                                <th scope="col">{this.state.activeRobots}</th>
+                            </tr>
+                            <tr>
+                                <th scope="col">No of Inactive robots</th>
+                                <th scope="col">{this.state.inActiveRobots}</th>
+                            </tr>
+                            <tr>
+                                <th scope="col">No of Connected robots</th>
+                                <th scope="col">{this.state.connectedRobots}</th>
+                            </tr>
+                            <tr>
+                                <th scope="col">No of Stooped robots</th>
+                                <th scope="col">{this.state.stoppedRobots}</th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <br />
+                <br />
 
-                    <h2 style={{ marginLeft: "30px", fontSize: "20px", marginTop: "30px" }}>State Distribution</h2>
-                    <br />
-                    <br />
-                    <div style={{ marginLeft: "50px", marginRight: "50px", backgroundColor: "#D6EAF8" }}>
-                        <table class="table">
-                            <tbody>
-                                <tr>
-                                    <th scope="col">No of Active robots</th>
-                                    <th scope="col">{this.state.activeRobots}</th>
-                                </tr>
-                                <tr>
-                                    <th scope="col">No of Inactive robots</th>
-                                    <th scope="col">{this.state.inActiveRobots}</th>
-                                </tr>
-                                <tr>
-                                    <th scope="col">No of Connected robots</th>
-                                    <th scope="col">{this.state.connectedRobots}</th>
-                                </tr>
-                                <tr>
-                                    <th scope="col">No of Stooped robots</th>
-                                    <th scope="col">{this.state.stoppedRobots}</th>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <br />
-                    <br />
-                    {graph}
-                </Sidebar>
             </div >
         );
     }
 }
 
-export default AdminStateDistribution;
+export default TempDistri;
