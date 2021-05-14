@@ -47,7 +47,7 @@ class AdminBilling extends Component {
                 return "rgb(" + r + "," + g + "," + b + ")";
             };
             labels.push(order.roboId);
-            data.push(Math.round(((order.runTime * (1 / 60)) * 100) / 100).toFixed(2));
+            data.push((order.runTime * (1 / 60)) .toFixed(2));
             backgroundColor.push(dynamicColors());
         });
         var state = {};
@@ -66,7 +66,7 @@ class AdminBilling extends Component {
                     <td>{robot.roboId}</td>
                     <td>{robot.userId}</td>
                     <td>{Math.round(robot.runTime)}</td>
-                    <td>{Math.round(((robot.runTime * (1 / 60)) * 100) / 100).toFixed(4)}</td>
+                    <td>{(robot.runTime * (1 / 60)).toFixed(2)}</td>
                 </tr>
             );
         });

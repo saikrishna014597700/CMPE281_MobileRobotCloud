@@ -93,7 +93,7 @@ class UserBilling extends Component {
           <td>{robot.roboId}</td>
           <td>{robot.roboName}</td>
           <td>{robot.runTime}</td>
-          <td>{Math.round(((robot.runTime * (1 / 60)) * 100) / 100).toFixed(2)}</td>
+          <td>{((robot.runTime * (1 / 60))).toFixed(2)}</td>
         </tr>
       );
     });
