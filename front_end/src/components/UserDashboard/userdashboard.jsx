@@ -17,7 +17,7 @@ const UserDashboard = () => {
   }
   return (
     <UserSidebar>
-      <div class="card2">
+      <div className="component_all">
         <br />
         <h2>
           Welcome {localStorage.getItem("user_fn")}{" "}
@@ -26,9 +26,8 @@ const UserDashboard = () => {
         <br />
         You logged in as an {localStorage.getItem("user_role")}
         <br />
-        <img src={roboImage}></img>
       </div>
-    </UserSidebar>
+    </UserSidebar >
   );
 };
 

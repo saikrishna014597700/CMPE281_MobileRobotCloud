@@ -29,7 +29,7 @@ export const NavbarUser = () => {
                 title: "Choose Robot",
                 itemId: "/chooseRobot",
               },
-             
+
               {
                 title: "Robot Status",
                 itemId: "/robotStatus",

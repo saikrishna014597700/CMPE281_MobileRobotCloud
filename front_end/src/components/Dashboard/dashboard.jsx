@@ -17,17 +17,14 @@ const HomePage = () => {
   }
   return (
     <Sidebar>
-      <div class="card2">
-        <br />
-        <h2>
-          Welcome {localStorage.getItem("user_fn")}{" "}
-          {localStorage.getItem("user_ln")}{" "}
-        </h2>
-        <br />
-        You logged in as an {localStorage.getItem("user_role")}
-        <br />
-        <img src={roboImage}></img>
-      </div>
+      <br />
+      <h2>
+        Welcome {localStorage.getItem("user_fn")}{" "}
+        {localStorage.getItem("user_ln")}{" "}
+      </h2>
+      <br />
+      You logged in as an {localStorage.getItem("user_role")}
+      <br />
     </Sidebar>
   );
 };

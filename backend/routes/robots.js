@@ -27,26 +27,31 @@ router.get("/allActiveRobots", async (req, response) => {
 });
 
 router.get("/robotsByUser", async (req, response) => {
-  // if (req.query.user_id) {
-  return robots
-    .find({ userId: req.query.userId })
-    .exec()
-    .then((robot) => {
-      response.status(200).json(robot);
-    })
-    .catch((err) => {
-      response.status(500).json({ error: err });
-    });
-  // }
-  // return robots
-  //   .find({ roboState: "Active" })
-  //   .exec()
-  //   .then((robot) => {
-  //     response.status(200).json(robot);
-  //   })
-  //   .catch((err) => {
-  //     response.status(500).json({ error: err });
-  //   });
+  console.log("User Id", req.query.userId)
+  if (!eq.query.userId) {
+    console.log("User Id If", req.query.userId)
+    return robots
+      .find()
+      .exec()
+      .then((robot) => {
+        response.status(200).json(robot);
+      })
+      .catch((err) => {
+        response.status(500).json({ error: err });
+      });
+  } else {
+    console.log("User Id else", req.query.userId)
+    return robots
+      .find({ userId: req.query.userId })
+      .exec()
+      .then((robot) => {
+        response.status(200).json(robot);
+      })
+      .catch((err) => {
+        response.status(500).json({ error: err });
+      });
+  }
+
 });
 
 router.get("/allRegRobots", async (req, response) => {
@@ -81,43 +86,44 @@ router.get("/getOperationsInfo", async (req, response) => {
       .exec()
       .then(async (robots) => {
         //console.log("robots :: ", robots.length)
-         await  robots.map(async (robo)=>{
-            let obj = {
-              _id: robo._id,
-              roboId: robo.roboId,
-              roboState:robo.roboState,
-              userId: robo.userId,
-              roboName:robo.roboName
-            }; 
-            await pool.query(`select * from billing_details where  user_id = ${obj.userId} and roboId = '${obj._id}'`,
-            
+        await robots.map(async (robo) => {
+          let obj = {
+            _id: robo._id,
+            roboId: robo.roboId,
+            roboState: robo.roboState,
+            userId: robo.userId,
+            roboName: robo.roboName
+          };
+          await pool.query(`select * from billing_details where  user_id = ${obj.userId} and roboId = '${obj._id}'`,
+
             async (error, result) => {
               //console.log(error) 
-              if(result.length >0){
+              if (result.length > 0) {
                 console.log(result[0].operations)
                 obj.serviceOperations = await result[0].operations;
-                console.log("obj ::", obj )
-              }else{
+                console.log("obj ::", obj)
+              } else {
                 obj.serviceOperations = 0;
               }
               returnArr.push(obj);
-              
+
             })
-          
 
-          })
 
-          setTimeout(()=>{
-          response.status(200).json(returnArr)}, 500)
-      
+        })
+
+        setTimeout(() => {
+          response.status(200).json(returnArr)
+        }, 500)
+
       })
       .catch((err) => {
         console.log("error ::: ", err)
         response.status(500).json({ error: err });
       });
-      
+
   }
-  
+
 });
 
 router.post("/createRobot", async (req, response) => {
@@ -197,7 +203,7 @@ router.post("/changeRobotPath", async (req, response) => {
     y: req.body.y,
   };
   return robots
-    .updateOne({ _id: req.body.id,userId:req.body.userId }, { $push: { roboPath: data } })
+    .updateOne({ _id: req.body.id, userId: req.body.userId }, { $push: { roboPath: data } })
     .exec()
     .then((robot) => {
       response.status(200).json(robot);
@@ -222,10 +228,10 @@ router.get("/getRobot", async (req, response) => {
 
 router.post("/updateStatus", async (req, response) => {
   const data = {
-  status:req.body.status
+    status: req.body.status
   };
   return robots
-    .updateOne({ _id: req.body.id }, { roboState:data.status})
+    .updateOne({ _id: req.body.id }, { roboState: data.status })
     .exec()
     .then((robot) => {
       response.status(200).json(robot);

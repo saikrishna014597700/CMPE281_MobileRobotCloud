@@ -51,6 +51,11 @@ export const Navbar = () => {
                         ],
                     },
                     {
+                        title: 'Admin Billing',
+                        itemId: '/adminBilling',
+                        elemBefore: () => <Icon name="briefcase" />
+                    },
+                    {
                         title: 'State distribution',
                         itemId: '/stateDistribution',
                         elemBefore: () => <Icon name="book" />

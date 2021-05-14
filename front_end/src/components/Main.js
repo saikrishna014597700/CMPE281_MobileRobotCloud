@@ -20,6 +20,7 @@ import MoveARobot from "./Robots/moveARobot";
 import RobotPath from "./Robots/robotPath";
 import PlotRobotPath from "./Robots/plotRobotPath";
 import UserBilling from "./Billing/userBilling";
+import AdminBilling from "./Billing/adminBilling";
 
 class Main extends Component {
     render() {
@@ -44,9 +45,10 @@ class Main extends Component {
                 <Route path="/robotPath" component={RobotPath} />
                 <Route path="/plotRobotPath" component={PlotRobotPath} />
                 <Route path="/userBilling" component={UserBilling} />
-                <Route path="/navigation" render={() => {window.open("./robot_controller.html");}} />
-                
-                
+                <Route path="/adminBilling" component={AdminBilling} />
+                <Route path="/navigation" render={() => { window.open("./robot_controller.html"); }} />
+
+
             </div>
         );
     }

@@ -3,6 +3,8 @@ import { Link, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { userActions } from "../../actions/user.action"
 import { useHistory } from "react-router-dom";
+import backImage from "./BackgroundImage.jpeg";
+import "./login.css";
 
 export const mapStatetoProps = user => ({
   user
@@ -40,9 +42,10 @@ function Login() {
   }
 
   return (
-    <div>
+    <div className="Login-component">
       <div className="col-lg-8 offset-lg-2" style={{ width: "25%", marginLeft: "35%", marginTop: "10%", borderStyle: "groove", borderRadius: "20px" }}>
-        <h3 style={{ marginLeft: "40%" }}>Login</h3>
+        <br />
+        <br />
         <br />
         <form name="form" onSubmit={handleSubmit}>
           <div className="form-group">
