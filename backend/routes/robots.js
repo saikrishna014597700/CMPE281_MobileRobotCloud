@@ -28,7 +28,7 @@ router.get("/allActiveRobots", async (req, response) => {
 
 router.get("/robotsByUser", async (req, response) => {
   console.log("User Id", req.query.userId)
-  if (!eq.query.userId) {
+  if (!req.query.userId) {
     console.log("User Id If", req.query.userId)
     return robots
       .find()

@@ -16,11 +16,7 @@ class AdminBilling extends Component {
         axios
             .get(
                 backend + "/api/robots/robotsByUser",
-                {
-                    params: {
-                        userId: localStorage.getItem("user_Id"),
-                    },
-                },
+                
                 {
                     headers: {
                         "Content-Type": "application/json",
