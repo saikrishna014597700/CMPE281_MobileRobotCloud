@@ -1,13 +1,13 @@
 "use strict";
 const config = {
   secret: "Your passport secret key",
-  frontendURI: "http://localhost:3000",
-  mysqlUser: "admin",
-  mysqlPassword: "cloudcomputing",
-  mysqlHost: "Database-1.c0gg1m1honux.us-west-2.rds.amazonaws.com",
-  mysqlDatabase: "MobileRobotCloud",
+  frontendURI: "Your frontend Uri",
+  mysqlUser: "Mysql user",
+  mysqlPassword: "Key",
+  mysqlHost: "Your mysql host name",
+  mysqlDatabase: "Your database",
   mongoDBURI:
-    "mongodb+srv://mobileCloudUser:cloudcomputing@cluster0.knqrf.mongodb.net/MobileRobotCloud?retryWrites=true&w=majority",
+    "Your mongo Uri",
 };
 
 module.exports = config;
